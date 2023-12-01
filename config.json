@@ -1,0 +1,12 @@
+{
+  "frontend": {
+    "repo": "https://github.com/nationalarchives/ds-etna-frontend"
+  },
+  "cms": {
+    "repo": "https://github.com/nationalarchives/ds-wagtail"
+  },
+  "postgres": {
+    "enabled": true,
+    "password": "psql123"
+  }
+}
