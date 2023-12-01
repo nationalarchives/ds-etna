@@ -6,7 +6,6 @@
     "repo": "https://github.com/nationalarchives/ds-wagtail"
   },
   "postgres": {
-    "enabled": true,
-    "password": "psql123"
+    "enabled": true
   }
 }
