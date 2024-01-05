@@ -23,3 +23,5 @@ CMD NOW=$(date +%s) && \
     pg_dump -h "$DATABASE_HOST" -p "$DATABASE_PORT" -d "$DATABASE_NAME" -U "$DATABASE_USER" --clean && \
     psql -h "$DATABASE_HOST" -p "$DATABASE_PORT" -d "$DATABASE_NAME" -U "$DATABASE_USER" < "./db_backups/$NOW.psql" && \
     platform mount:download -e "$PLATFORM_ENV" -p "$PLATFORM_PROJECT_ID" -m media --target=/media --exclude="/images/*" --yes
+
+CMD ["tail", "-f", "/dev/null"]
