@@ -4,7 +4,10 @@
 
 ```sh
 SECRET_KEY=$(python -c 'import secrets; print(secrets.token_hex())')
-openssl genrsa -des3 -out ./ssl/tna.dblclk.dev.key 2048
-openssl req -x509 -new -nodes -key ./ssl/tna.dblclk.dev.key -sha256 -days 1825 -out ./ssl/tna.dblclk.dev.pem
+
+docker-compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ --dry-run -d tna.dblclk.dev
+
 docker-compose up -d
+
+docker-compose run --rm certbot renew
 ```
