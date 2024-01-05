@@ -22,6 +22,5 @@ CMD NOW=$(date +%s) && \
     sed -i "s@develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site@tna.dblclk.dev@g" "./db_backups/$NOW.psql" && \
     pg_dump -h "$DATABASE_HOST" -p "$DATABASE_PORT" -d "$DATABASE_NAME" -U "$DATABASE_USER" --clean && \
     psql -h "$DATABASE_HOST" -p "$DATABASE_PORT" -d "$DATABASE_NAME" -U "$DATABASE_USER" < "./db_backups/$NOW.psql" && \
-    platform mount:download -e "$PLATFORM_ENV" -p "$PLATFORM_PROJECT_ID" -m media --target=/media --exclude="/images/*" --yes
-
-CMD ["tail", "-f", "/dev/null"]
+    platform mount:download -e "$PLATFORM_ENV" -p "$PLATFORM_PROJECT_ID" -m media --target=/media --exclude="/images/*" --yes && \
+    tail -f /dev/null
