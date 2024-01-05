@@ -76,7 +76,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - media:/media
+      - media:/app/media
     expose:
       - 8080
 
