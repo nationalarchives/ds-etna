@@ -2,6 +2,7 @@ version: '3'
 
 services:
   nginx:
+    container_name: nginx
     image: nginx:latest
     ports:
       - 80:80
@@ -11,9 +12,11 @@ services:
       - ./ssl:/ssl/
 
   frontend:
+    container_name: frontend
     image: ghcr.io/nationalarchives/national-archives-website-frontend:latest
+    env_file:
+      - .env
     environment:
-      - SECRET_KEY
       - WAGTAIL_API_URL=http://cms:8080/api/v2
       - WAGTAIL_MEDIA_URL=https://tna.dblclk.dev
       - SEARCH_API_URL=http://search:8080
@@ -24,9 +27,11 @@ services:
       - 8080
 
   db:
+    container_name: db
     image: postgres:13.0
 
   cms:
+    container_name: cms
     image: ghcr.io/nationalarchives/national-archives-website:develop
     volumes:
       - media:/media
@@ -43,11 +48,13 @@ services:
       - 8080
 
   search:
+    container_name: saerch
     image: ghcr.io/nationalarchives/national-archives-search-api:latest
     depends_on:
       - cms
+    env_file:
+      - .env
     environment:
-      - SECRET_KEY
       - DISCOVERY_API_URL=https://discovery.nationalarchives.gov.uk/API/search/v1
       - WAGTAIL_API_URL=http://cms:8080/api/v2
     expose:
