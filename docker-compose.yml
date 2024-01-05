@@ -17,6 +17,8 @@ services:
   certbot:
     container_name: certbot
     image: certbot/certbot:latest
+    depends_on:
+      - nginx
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
@@ -47,17 +49,13 @@ services:
       - POSTGRES_USER=etna
       - POSTGRES_DB=etna
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data:rw
     expose:
       - 5432
 
   cms:
     container_name: cms
     image: ghcr.io/nationalarchives/national-archives-website:develop
-    volumes:
-      - media:/media
-    depends_on:
-      - postgres
     env_file:
       - .env
     environment:
@@ -73,20 +71,24 @@ services:
       - KONG_IMAGE_PREVIEW_BASE_URL=https://ciim-media.s3.eu-west-2.amazonaws.com/preview/
       - KONG_CLIENT_KEY=${KONG_CLIENT_KEY}
       - KONG_CLIENT_VERIFY_CERTIFICATES=False
+    depends_on:
+      - postgres
+    volumes:
+      - media:/media
     ports:
       - 9001:8080
 
   search:
     container_name: search
     image: ghcr.io/nationalarchives/national-archives-search-api:latest
-    depends_on:
-      - cms
     env_file:
       - .env
     environment:
       - SECRET_KEY=${SECRET_KEY}
       - DISCOVERY_API_URL=https://discovery.nationalarchives.gov.uk/API/search/v1
       - WAGTAIL_API_URL=http://cms:8080/api/v2
+    depends_on:
+      - cms
     ports:
       - 9002:8080
 
@@ -101,13 +103,13 @@ services:
         DATABASE_USER: etna
         PGPASSWORD: ${POSTGRES_PASSWORD}
         PLATFORM_PROJECT_ID: rasrzs7pi6sd4
+        PLATFORM_ENV: main
         PLATFORMSH_CLI_TOKEN: ${PLATFORMSH_CLI_TOKEN}
     depends_on:
       - postgres
-    env_file:
-      - .env
     volumes:
-      - db_backups:/app/db_backups
+      - db_backups:/app/db_backups:rw
+      - media:/media:rw
   
 volumes:
   pgdata:
