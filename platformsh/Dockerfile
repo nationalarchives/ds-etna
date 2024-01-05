@@ -19,8 +19,8 @@ RUN mkdir db_backups
 
 CMD NOW=$(date +%s) && \
     platform db:dump -e "$PLATFORM_ENV" -p "$PLATFORM_PROJECT_ID" -f "./db_backups/$NOW.psql" && \
-    sed -i "s@beta.nationalarchives.gov.uk@tna.dblclk.dev@g" "./db_backups/$NOW.psql" && \
-    sed -i "s@develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site@tna.dblclk.dev@g" "./db_backups/$NOW.psql" && \
+    sed -i "s/beta.nationalarchives.gov.uk/tna.dblclk.dev/g" "./db_backups/$NOW.psql" && \
+    sed -i "s/develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site/tna.dblclk.dev/g" "./db_backups/$NOW.psql" && \
     pg_dump -h "$DATABASE_HOST" -p "$DATABASE_PORT" -d "$DATABASE_NAME" -U "$DATABASE_USER" --clean && \
     dropdb --if-exists -h "$DATABASE_HOST" -p "$DATABASE_PORT" -U "$DATABASE_USER" "$DATABASE_NAME" && \
     createdb -h "$DATABASE_HOST" -p "$DATABASE_PORT" -U "$DATABASE_USER" "$DATABASE_NAME" && \
