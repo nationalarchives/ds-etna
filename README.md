@@ -12,6 +12,7 @@ echo "POSTGRES_PASSWORD=$(python -c 'import secrets; print(secrets.token_hex())'
 echo "KONG_CLIENT_KEY=[key]" >> .env
 echo "PLATFORMSH_CLI_TOKEN=[token]" >> .env
 
+# Start the services
 docker-compose up -d
 
 # Test certbot - remove --dry-run if working
