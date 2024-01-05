@@ -50,7 +50,7 @@ services:
       - POSTGRES_USER=etna
       - POSTGRES_DB=etna
     volumes:
-      - pgdata:/var/lib/postgresql/data:rw
+      - ./pgdata:/var/lib/postgresql/data:rw
     expose:
       - 5432
 
@@ -76,7 +76,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - media:/app/media
+      - ./media:/app/media:rw
     expose:
       - 8080
 
@@ -104,15 +104,15 @@ services:
       - DATABASE_USER=etna
       - PGPASSWORD=${POSTGRES_PASSWORD}
       - PLATFORM_PROJECT_ID=rasrzs7pi6sd4
-      - PLATFORM_ENV=develop
+      - PLATFORM_ENV=main
       - PLATFORMSH_CLI_TOKEN=${PLATFORMSH_CLI_TOKEN}
     depends_on:
       - postgres
     volumes:
-      - db_backups:/app/db_backups:rw
-      - media:/media:rw
+      - ./db_backups:/app/db_backups:rw
+      - ./media:/media:rw
   
-volumes:
-  pgdata:
-  media:
-  db_backups:
+# volumes:
+  # pgdata:
+  # media:
+  # db_backups:

@@ -5,3 +5,6 @@ ssl/*.key
 certbot
 !certbot/conf/.gitkeep
 !certbot/www/.gitkeep
+pgdata
+media
+db_backups
