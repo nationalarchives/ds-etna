@@ -15,16 +15,8 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y openssh-server git libpopt0 rsync postgresql
 
-RUN export DATABASE_HOST="$DATABASE_HOST"; \
-    export DATABASE_PORT="$DATABASE_PORT"; \
-    export DATABASE_NAME="$DATABASE_NAME"; \
-    export DATABASE_USER="$DATABASE_USER"; \
-    export PGPASSWORD="$PGPASSWORD"; \
-    export PLATFORM_PROJECT_ID="$PLATFORM_PROJECT_ID"; \
-    export PLATFORM_ENV="$PLATFORM_ENV"; \
-    export PLATFORMSH_CLI_TOKEN="$PLATFORMSH_CLI_TOKEN"
-
 RUN mkdir db_backups
+
 CMD NOW=$(date +%s) && \
     platform db:dump -e "$PLATFORM_ENV" -p "$PLATFORM_PROJECT_ID" -f "./db_backups/$NOW.psql" && \
     sed -i "s@beta.nationalarchives.gov.uk@tna.dblclk.dev@g" "./db_backups/$NOW.psql" && \

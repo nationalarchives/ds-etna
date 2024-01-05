@@ -96,17 +96,16 @@ services:
 
   platform:
     container_name: platform
-    build:
-      context: ./platformsh
-      args:
-        DATABASE_HOST: host.docker.internal
-        DATABASE_PORT: 5432
-        DATABASE_NAME: etna
-        DATABASE_USER: etna
-        PGPASSWORD: ${POSTGRES_PASSWORD}
-        PLATFORM_PROJECT_ID: rasrzs7pi6sd4
-        PLATFORM_ENV: develop
-        PLATFORMSH_CLI_TOKEN: ${PLATFORMSH_CLI_TOKEN}
+    build: ./platformsh
+    environment:
+      - DATABASE_HOST=host.docker.internal
+      - DATABASE_PORT=5432
+      - DATABASE_NAME=etna
+      - DATABASE_USER=etna
+      - PGPASSWORD=${POSTGRES_PASSWORD}
+      - PLATFORM_PROJECT_ID=rasrzs7pi6sd4
+      - PLATFORM_ENV=develop
+      - PLATFORMSH_CLI_TOKEN=${PLATFORMSH_CLI_TOKEN}
     depends_on:
       - postgres
     volumes:
