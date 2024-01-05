@@ -5,6 +5,9 @@
   "cms": {
     "repo": "https://github.com/nationalarchives/ds-wagtail"
   },
+  "search": {
+    "repo": "https://github.com/nationalarchives/ds-etna-search"
+  },
   "postgres": {
     "enabled": true
   }
