@@ -26,5 +26,4 @@ CMD NOW=$(date +%s) && \
     createdb -h "$DATABASE_HOST" -p "$DATABASE_PORT" -U "$DATABASE_USER" "$DATABASE_NAME" && \
     psql -h "$DATABASE_HOST" -p "$DATABASE_PORT" -d "$DATABASE_NAME" -U "$DATABASE_USER" < "./db_backups/$NOW.psql" && \
     platform mount:download -e "$PLATFORM_ENV" -p "$PLATFORM_PROJECT_ID" -m media --target=/media --exclude="/images/*" --yes && \
-    chmod -fR 777 /media && \
-    tail -f /dev/null
+    chmod -fR 777 /media
