@@ -4,6 +4,8 @@ services:
   nginx:
     container_name: nginx
     image: nginx:latest
+    depends_on:
+      - frontend
     ports:
       - 80:80
       - 443:443
@@ -26,6 +28,7 @@ services:
       - .env
     environment:
       - ENVIRONMENT=develop
+      - LOG_LEVEL=debug
       - SECRET_KEY=${SECRET_KEY}
       - WAGTAIL_API_URL=http://host.docker.internal:9001/api/v2
       - WAGTAIL_MEDIA_URL=https://tna.dblclk.dev
