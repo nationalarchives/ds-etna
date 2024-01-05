@@ -9,11 +9,19 @@ ARG PLATFORM_PROJECT_ID
 ARG PLATFORM_ENV
 ARG PLATFORMSH_CLI_TOKEN
 
+
+RUN useradd --system --create-home app; \
+    mkdir -p /app; \
+    chown app:app -R /app; \
+    chmod 700 /app
+ENV HOME=/home/app
 WORKDIR /app
 
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y openssh-server git libpopt0 rsync postgresql
+
+USER app
 
 RUN mkdir db_backups
 
