@@ -109,7 +109,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - db_backups:/app/db_backups:rw
+      - db_backups:/home/app/db_backups:rw
       - media:/media:rw
   
 volumes:

@@ -9,19 +9,11 @@ ARG PLATFORM_PROJECT_ID
 ARG PLATFORM_ENV
 ARG PLATFORMSH_CLI_TOKEN
 
-
-RUN useradd --system --create-home app; \
-    mkdir -p /app; \
-    chown app:app -R /app; \
-    chmod 700 /app
-ENV HOME=/home/app
 WORKDIR /app
 
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y openssh-server git libpopt0 rsync postgresql
-
-USER app
 
 RUN mkdir db_backups
 
@@ -34,4 +26,5 @@ CMD NOW=$(date +%s) && \
     createdb -h "$DATABASE_HOST" -p "$DATABASE_PORT" -U "$DATABASE_USER" "$DATABASE_NAME" && \
     psql -h "$DATABASE_HOST" -p "$DATABASE_PORT" -d "$DATABASE_NAME" -U "$DATABASE_USER" < "./db_backups/$NOW.psql" && \
     platform mount:download -e "$PLATFORM_ENV" -p "$PLATFORM_PROJECT_ID" -m media --target=/media --exclude="/images/*" --yes && \
+    chmod -fR 777 /media && \
     tail -f /dev/null
