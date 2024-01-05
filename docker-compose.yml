@@ -30,9 +30,9 @@ services:
       - .env
     environment:
       - SECRET_KEY=${SECRET_KEY}
-      - WAGTAIL_API_URL=http://cms:9001/api/v2
+      - WAGTAIL_API_URL=http://cms:8080/api/v2
       - WAGTAIL_MEDIA_URL=https://tna.dblclk.dev
-      - SEARCH_API_URL=http://search:9002
+      - SEARCH_API_URL=http://search:8080
     depends_on:
       - cms
       - search
@@ -75,8 +75,8 @@ services:
       - postgres
     volumes:
       - media:/media
-    ports:
-      - 9001:8080
+    expose:
+      - 8080
 
   search:
     container_name: search
@@ -89,8 +89,8 @@ services:
       - WAGTAIL_API_URL=http://cms:8080/api/v2
     depends_on:
       - cms
-    ports:
-      - 9002:8080
+    expose:
+      - 8080
 
   platform:
     container_name: platform
