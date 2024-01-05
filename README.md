@@ -6,6 +6,7 @@
 touch .env
 echo "SECRET_KEY=$(python -c 'import secrets; print(secrets.token_hex())')" >> .env
 echo "POSTGRES_PASSWORD=$(python -c 'import secrets; print(secrets.token_hex())')" >> .env
+echo "KONG_CLIENT_KEY=[key]" >> .env
 
 docker-compose up -d
 
