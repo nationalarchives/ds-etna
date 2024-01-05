@@ -25,10 +25,11 @@ services:
     env_file:
       - .env
     environment:
+      - ENVIRONMENT=develop
       - SECRET_KEY=${SECRET_KEY}
-      - WAGTAIL_API_URL=http://cms:8080/api/v2
+      - WAGTAIL_API_URL=http://host.docker.internal:9001/api/v2
       - WAGTAIL_MEDIA_URL=https://tna.dblclk.dev
-      - SEARCH_API_URL=http://search:8080
+      - SEARCH_API_URL=http://host.docker.internal:9002
     depends_on:
       - cms
       - search
@@ -71,8 +72,8 @@ services:
       - KONG_IMAGE_PREVIEW_BASE_URL=https://ciim-media.s3.eu-west-2.amazonaws.com/preview/
       - KONG_CLIENT_KEY=${KONG_CLIENT_KEY}
       - KONG_CLIENT_VERIFY_CERTIFICATES=False
-    expose:
-      - 8080
+    ports:
+      - 9001:8080
 
   search:
     container_name: saerch
@@ -85,8 +86,8 @@ services:
       - SECRET_KEY=${SECRET_KEY}
       - DISCOVERY_API_URL=https://discovery.nationalarchives.gov.uk/API/search/v1
       - WAGTAIL_API_URL=http://cms:8080/api/v2
-    expose:
-      - 8080
+    ports:
+      - 9002:8080
   
 volumes:
   pgdata:
