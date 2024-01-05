@@ -2,3 +2,6 @@
 ssl/*.pem
 ssl/*.key
 .env
+certbot
+!certbot/conf/.gitkeep
+!certbot/www/.gitkeep
