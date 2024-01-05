@@ -13,6 +13,7 @@ services:
       - ./certbot/conf/:/etc/nginx/ssl/:ro
 
   certbot:
+    container_name: certbot
     image: certbot/certbot:latest
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
@@ -35,11 +36,15 @@ services:
 
   db:
     container_name: db
-    image: postgres:12.0
+    image: postgres:13
     environment:
       - POSTGRES_PASSWORD
       - POSTGRES_USER=etna
       - POSTGRES_DB=etna
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    expose:
+      - 5432
 
   cms:
     container_name: cms
@@ -52,7 +57,7 @@ services:
       - .env
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.production
-      - DATABASE_HOST=db
+      - DATABASE_HOST=db:5432
       - DATABASE_NAME=etna
       - DATABASE_USER=etna
     expose:
@@ -72,4 +77,5 @@ services:
       - 8080
   
 volumes:
+  pgdata:
   media:
