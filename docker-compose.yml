@@ -33,6 +33,7 @@ services:
       - WAGTAIL_API_URL=http://cms:8080/api/v2
       - WAGTAIL_MEDIA_URL=https://tna.dblclk.dev
       - SEARCH_API_URL=http://search:8080
+      - CACHE_DEFAULT_TIMEOUT=1
     depends_on:
       - cms
       - search
@@ -103,7 +104,7 @@ services:
         DATABASE_USER: etna
         PGPASSWORD: ${POSTGRES_PASSWORD}
         PLATFORM_PROJECT_ID: rasrzs7pi6sd4
-        PLATFORM_ENV: main
+        PLATFORM_ENV: develop
         PLATFORMSH_CLI_TOKEN: ${PLATFORMSH_CLI_TOKEN}
     depends_on:
       - postgres
