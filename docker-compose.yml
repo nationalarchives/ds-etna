@@ -98,7 +98,7 @@ services:
     container_name: platform
     build: ./platformsh
     environment:
-      - DATABASE_HOST=host.docker.internal
+      - DATABASE_HOST=postgres
       - DATABASE_PORT=5432
       - DATABASE_NAME=etna
       - DATABASE_USER=etna
