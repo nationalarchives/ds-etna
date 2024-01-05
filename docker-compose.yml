@@ -72,7 +72,7 @@ services:
       - KONG_CLIENT_BASE_URL=https://aa83a1e6831944fa8bcf17f5ce391b73-58be9fd587cba13e.elb.eu-west-2.amazonaws.com/api/v1/data
       - KONG_IMAGE_PREVIEW_BASE_URL=https://ciim-media.s3.eu-west-2.amazonaws.com/preview/
       - KONG_CLIENT_KEY=${KONG_CLIENT_KEY}
-      - KONG_CLIENT_VERIFY_CERTIFICATES=False
+      - KONG_CLIENT_VERIFY_CERTIFICATES=false
     depends_on:
       - postgres
     volumes:
