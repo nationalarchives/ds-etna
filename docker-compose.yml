@@ -28,9 +28,9 @@ services:
       - .env
     environment:
       - SECRET_KEY=${SECRET_KEY}
-      - WAGTAIL_API_URL=http://host.docker.internal:9001/api/v2
+      - WAGTAIL_API_URL=http://cms:9001/api/v2
       - WAGTAIL_MEDIA_URL=https://tna.dblclk.dev
-      - SEARCH_API_URL=http://host.docker.internal:9002
+      - SEARCH_API_URL=http://search:9002
     depends_on:
       - cms
       - search
