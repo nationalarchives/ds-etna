@@ -20,7 +20,7 @@ zero_downtime_deploy() {
   new_container_ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $new_container_id)
   echo "New container ID: $new_container_id"
   echo "New container IP: $new_container_ip"
-  curl --silent --include --retry-connrefused --retry 60 --retry-delay 1 --fail http://$new_container_ip:8080/healthcheck/live/ || curl --silent --include --retry-connrefused --retry 60 --retry-delay 1 --fail http://$new_container_ip:8080 || exit 1
+  curl --silent --include --retry-connrefused --retry 60 --retry-delay 1 --fail http://$new_container_ip:8080/healthcheck/live/ || exit 1
 
   # start routing requests to the new container (as well as the old)
   reload_nginx
