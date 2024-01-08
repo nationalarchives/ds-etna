@@ -24,7 +24,6 @@ services:
       - ./certbot/conf/:/etc/letsencrypt/:rw
 
   frontend:
-    container_name: frontend
     image: ghcr.io/nationalarchives/national-archives-website-frontend:latest
     env_file:
       - .env
@@ -55,7 +54,6 @@ services:
       - 5432
 
   cms:
-    container_name: cms
     image: ghcr.io/nationalarchives/national-archives-website:develop
     env_file:
       - .env
@@ -81,7 +79,6 @@ services:
       - 8080
 
   search:
-    container_name: search
     image: ghcr.io/nationalarchives/national-archives-search-api:latest
     env_file:
       - .env
