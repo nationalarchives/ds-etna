@@ -42,4 +42,4 @@ zero_downtime_deploy cms
 zero_downtime_deploy search
 zero_downtime_deploy frontend
 docker-compose up -d
-# docker-compose up -d --build --force-recreate
+docker system prune --force --all --volumes
