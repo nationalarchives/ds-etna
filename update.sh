@@ -40,9 +40,9 @@ zero_downtime_deploy() {
 }
 
 git pull
+docker-compose up -d
 docker-compose pull
 zero_downtime_deploy cms
 zero_downtime_deploy search
 zero_downtime_deploy frontend
-docker-compose up -d
 docker system prune --force --all --volumes
