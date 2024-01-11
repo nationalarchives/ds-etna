@@ -7,9 +7,10 @@ reload_nginx() {
 
 zero_downtime_deploy() {
   service_name=$1
-  echo "Redeploy $1"
+  echo "------------------------------------------"
+  echo "Redeploying $service_name"
   old_container_id=$(docker ps -f name=$service_name -q | tail -n1)
-  echo "Old container ID: $old_container_id"
+  echo "Old container ID: $old_container_id ($service_name)"
 
   # bring a new container online, running new code
   # (nginx continues routing to the old container only)
@@ -18,15 +19,15 @@ zero_downtime_deploy() {
   # wait for new container to be available
   new_container_id=$(docker ps -f name=$service_name -q | head -n1)
   new_container_ip=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $new_container_id)
-  echo "New container ID: $new_container_id"
-  echo "New container IP: $new_container_ip"
+  echo "New container ID: $new_container_id ($service_name)"
+  echo "New container IP: $new_container_ip ($service_name)"
   curl --silent --include --retry-connrefused --retry 60 --retry-delay 1 --fail http://$new_container_ip:8080/healthcheck/live/ || exit 1
 
   # start routing requests to the new container (as well as the old)
   reload_nginx
 
-  # take the old container offline  
-  echo "Stopping and removing $old_container_id"
+  # take the old container offline
+  echo "Stopping and removing $old_container_id ($service_name)"
   docker stop $old_container_id
   docker rm $old_container_id
 
@@ -34,6 +35,8 @@ zero_downtime_deploy() {
 
   # stop routing requests to the old container
   reload_nginx
+
+  echo "$service_name updated"
 }
 
 git pull
