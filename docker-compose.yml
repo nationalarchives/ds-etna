@@ -59,6 +59,7 @@ services:
       - .env
     environment:
       - SECRET_KEY=${SECRET_KEY}
+      - COOKIE_DOMAIN=tna.dblclk.dev
       - DJANGO_SETTINGS_MODULE=config.settings.production
       - WAGTAILADMIN_BASE_URL=https://tna.dblclk.dev/
       - DATABASE_HOST=postgres
