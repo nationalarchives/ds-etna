@@ -62,6 +62,7 @@ services:
       - COOKIE_DOMAIN=tna.dblclk.dev
       - DJANGO_SETTINGS_MODULE=config.settings.production
       - WAGTAILADMIN_BASE_URL=https://tna.dblclk.dev/
+      - CSRF_TRUSTED_ORIGINS=https://tna.dblclk.dev
       - DATABASE_HOST=postgres
       - DATABASE_PORT=5432
       - DATABASE_NAME=etna
