@@ -34,6 +34,7 @@ services:
       - SEARCH_API_URL=http://search:8080/api/v1
       - CACHE_DEFAULT_TIMEOUT=60
       - GA4_ID=GTM-KX8ZWVZG
+      - DOMAIN=tna.dblclk.dev
     depends_on:
       - cms
       - search
