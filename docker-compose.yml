@@ -76,8 +76,10 @@ services:
       - KONG_IMAGE_PREVIEW_BASE_URL=https://ciim-media.s3.eu-west-2.amazonaws.com/preview/
       - KONG_CLIENT_KEY=${KONG_CLIENT_KEY}
       - KONG_CLIENT_VERIFY_CERTIFICATES=false
+      - REDIS_URL=redis://:redis@redis:6379
     depends_on:
       - postgres
+      - redis
     volumes:
       - media:/app/media:rw
     expose:
@@ -113,6 +115,13 @@ services:
     volumes:
       - db_backups:/home/app/db_backups:rw
       - media:/media:rw
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    command: /bin/sh -c "redis-server --requirepass redis"
+    ports:
+      - 6379:6379
   
 volumes:
   pgdata:
