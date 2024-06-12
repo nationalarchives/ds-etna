@@ -14,7 +14,7 @@ zero_downtime_deploy() {
 
   # bring a new container online, running new code
   # (nginx continues routing to the old container only)
-  docker-compose up -d --no-deps --scale $service_name=2 --no-recreate $service_name
+  docker compose up -d --no-deps --scale $service_name=2 --no-recreate $service_name
 
   # wait for new container to be available
   new_container_id=$(docker ps -f name=$service_name -q | head -n1)
@@ -31,7 +31,7 @@ zero_downtime_deploy() {
   docker stop $old_container_id
   docker rm $old_container_id
 
-  docker-compose up -d --no-deps --scale $service_name=1 --no-recreate $service_name
+  docker compose up -d --no-deps --scale $service_name=1 --no-recreate $service_name
 
   # stop routing requests to the old container
   reload_nginx
@@ -40,8 +40,8 @@ zero_downtime_deploy() {
 }
 
 git pull
-docker-compose up -d
-docker-compose pull
+docker compose up -d
+docker compose pull
 zero_downtime_deploy cms
 zero_downtime_deploy search
 zero_downtime_deploy frontend
