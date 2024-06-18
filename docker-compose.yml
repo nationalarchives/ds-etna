@@ -101,7 +101,8 @@ services:
       - .env
     environment:
       - SECRET_KEY=${SECRET_KEY}
-      - WAGTAIL_API_URL=http://cms:8080/api/v2
+      # - WAGTAIL_API_URL=http://cms:8080/api/v2
+      - WAGTAIL_API_URL=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site/api/v2
       - ROSETTA_API_URL=http://afa13a7c0067b4f01991b0bad9e003a4-edf0e30af2b95f5f.elb.eu-west-2.amazonaws.com/api/v1
     depends_on:
       - cms
