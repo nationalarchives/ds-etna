@@ -101,6 +101,8 @@ services:
     env_file:
       - .env
     environment:
+      - ENVIRONMENT=staging
+      - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
       - SENTRY_DSN=https://3e24f4f474026e113e6dcdeccf2abded@o1230303.ingest.us.sentry.io/4507458864087040
       # - WAGTAIL_API_URL=http://cms:8080/api/v2
