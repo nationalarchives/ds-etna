@@ -39,10 +39,10 @@ services:
       - DOMAIN=tna.dblclk.dev
       - COOKIE_DOMAIN=.dblclk.dev
       - CSP_IMG_SRC='self',tna.dblclk.dev,develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site,https://*.nationalarchives.gov.uk,https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
-      - CSP_SCRIPT_SRC='self',https://www.googletagmanager.com
+      - CSP_SCRIPT_SRC='self',https://www.googletagmanager.com,*.sentry-cdn.com
       - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
       - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
-      - CSP_CONNECT_SRC='self',https://*.google-analytics.com
+      - CSP_CONNECT_SRC='self',https://*.google-analytics.com,*.sentry.io
       - CSP_MEDIA_SRC='self',develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
       - CSP_WORKER_SRC='self',blob:,tna.dblclk.dev
       - FRAME_DOMAIN_ALLOW=develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
