@@ -24,7 +24,7 @@ services:
       - ./certbot/conf/:/etc/letsencrypt/:rw
 
   frontend:
-    image: ghcr.io/nationalarchives/national-archives-website-frontend:latest
+    image: ghcr.io/nationalarchives/national-archives-website-frontend:24.06.21.367
     env_file:
       - .env
     environment:
