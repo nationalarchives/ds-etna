@@ -45,4 +45,5 @@ docker compose pull
 # zero_downtime_deploy cms
 zero_downtime_deploy search
 zero_downtime_deploy frontend
+zero_downtime_deploy frontend-develop
 docker system prune --force --all --volumes
