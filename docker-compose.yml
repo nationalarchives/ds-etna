@@ -93,7 +93,7 @@ services:
     expose:
       - 8080
   search:
-    image: ghcr.io/nationalarchives/national-archives-search-api:latest
+    image: ghcr.io/nationalarchives/national-archives-search-api:24.06.25.88
     env_file:
       - .env
     environment:
