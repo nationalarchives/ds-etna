@@ -36,15 +36,17 @@ services:
       - SEARCH_API_URL=http://search:8080/api/v1
       - DOMAIN=tna.dblclk.dev
       - COOKIE_DOMAIN=.dblclk.dev
-      - CSP_IMG_SRC='self',tna.dblclk.dev,https://beta.nationalarchives.gov.uk
+      - CSP_IMG_SRC='self',https://tna.dblclk.dev,https://beta.nationalarchives.gov.uk,https://i.ytimg.com
       - CSP_SCRIPT_SRC='self'
-      - CSP_SCRIPT_SRC_ELEM='self',https://www.googletagmanager.com,*.sentry-cdn.com
+      - CSP_SCRIPT_SRC_ELEM='self',https://www.googletagmanager.com,https://*.sentry-cdn.com,https://www.youtube.com
       - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
       - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
-      - CSP_CONNECT_SRC='self',https://*.google-analytics.com,*.sentry.io
-      - CSP_MEDIA_SRC='self',beta.nationalarchives.gov.uk
-      - CSP_WORKER_SRC='self',blob:,tna.dblclk.dev
-      - FRAME_DOMAIN_ALLOW=beta.nationalarchives.gov.uk
+      - CSP_CONNECT_SRC='self',https://*.google-analytics.com,https://*.sentry.io,https://noembed.com
+      - CSP_MEDIA_SRC='self',https://beta.nationalarchives.gov.uk
+      - CSP_WORKER_SRC='self',blob:,https://tna.dblclk.dev
+      - CSP_FRAME_SRC='self',https://www.youtube-nocookie.com
+      - CSP_FEATURE_PICTURE_IN_PICTURE='self',https://www.youtube-nocookie.com
+      - FRAME_DOMAIN_ALLOW=https://beta.nationalarchives.gov.uk
       - CACHE_DEFAULT_TIMEOUT=10
       - GA4_ID=GTM-KX8ZWVZG
     depends_on:
@@ -66,15 +68,17 @@ services:
       - SEARCH_API_URL=http://search:8080/api/v1
       - DOMAIN=develop.tna.dblclk.dev
       - COOKIE_DOMAIN=.dblclk.dev
-      - CSP_IMG_SRC='self',develop.tna.dblclk.dev,develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site,https://*.nationalarchives.gov.uk,https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
+      - CSP_IMG_SRC='self',https://develop.tna.dblclk.dev,https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site,https://*.nationalarchives.gov.uk,https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site,https://i.ytimg.com
       - CSP_SCRIPT_SRC='self'
-      - CSP_SCRIPT_SRC_ELEM='self',https://www.googletagmanager.com,*.sentry-cdn.com
+      - CSP_SCRIPT_SRC_ELEM='self',https://www.googletagmanager.com,https://*.sentry-cdn.com,https://www.youtube.com
       - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
       - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
-      - CSP_CONNECT_SRC='self',https://*.google-analytics.com,*.sentry.io
-      - CSP_MEDIA_SRC='self',develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
-      - CSP_WORKER_SRC='self',blob:,develop.tna.dblclk.dev
-      - FRAME_DOMAIN_ALLOW=develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
+      - CSP_CONNECT_SRC='self',https://*.google-analytics.com,https://*.sentry.io,https://noembed.com
+      - CSP_MEDIA_SRC='self',https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
+      - CSP_WORKER_SRC='self',blob:,https://develop.tna.dblclk.dev
+      - CSP_FRAME_SRC='self',https://www.youtube-nocookie.com
+      - CSP_FEATURE_PICTURE_IN_PICTURE='self',https://www.youtube-nocookie.com
+      - FRAME_DOMAIN_ALLOW=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
       - CACHE_DEFAULT_TIMEOUT=10
       - GA4_ID=GTM-KX8ZWVZG
     depends_on:
