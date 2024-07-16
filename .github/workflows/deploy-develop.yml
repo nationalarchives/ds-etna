@@ -20,6 +20,18 @@ jobs:
       PLATFORMSH_CLI_TOKEN: ${{ secrets.PLATFORMSH_CLI_TOKEN }}
     steps:
 
+      - uses: actions/checkout@v4
+        with:
+          repository: nationalarchives/ds-etna-frontend
+          path: frontend
+      - uses: actions/checkout@v4
+        with:
+          repository: nationalarchives/ds-wagtail
+          path: cms
+      - uses: actions/checkout@v4
+        with:
+          repository: nationalarchives/ds-etna-search
+          path: search
 
       - name: Install Platform.sh CLI
         run: |
@@ -29,10 +41,6 @@ jobs:
           platform db:dump -p $PLATFORM_PROJECT_ID -e $PLATFORM_BRANCH -f dump.psql -d database_dumps
 
 
-      - uses: actions/checkout@v4
-        with:
-          repository: nationalarchives/ds-etna-frontend
-          path: frontend
       - name: Start frontend
         run: |
           cd frontend
@@ -43,10 +51,6 @@ jobs:
       - name: Check
         run: >
           curl --silent http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
-      - uses: actions/checkout@v4
-        with:
-          repository: nationalarchives/ds-wagtail
-          path: cms
 
       - name: Prepare CMS
         run: |
@@ -78,10 +82,6 @@ jobs:
       # - name: Check
       #   run: >
       #     curl --silent http://localhost:65535/ | grep 'something'
-      - uses: actions/checkout@v4
-        with:
-          repository: nationalarchives/ds-etna-search
-          path: search
       - name: Start search
         run: |
           cd search
