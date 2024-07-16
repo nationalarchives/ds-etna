@@ -38,7 +38,7 @@ jobs:
           cd cms
           curl -fsSL https://raw.githubusercontent.com/platformsh/cli/main/installer.sh | bash
           platform
-          platform db:dump -p $PLATFORM_PROJECT_ID -e $PLATFORM_BRANCH -d .. -f dump.psql
+          platform db:dump -p $PLATFORM_PROJECT_ID -e $PLATFORM_BRANCH -f dump.psql
 
       - name: Start CMS
         run: |
@@ -46,8 +46,7 @@ jobs:
           touch .env
           docker compose up db -d
 
-          docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < ..
-          /dump.psql
+          docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < dump.psql
 
           platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
           # docker compose exec cli chmod -fR 777 media
