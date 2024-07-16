@@ -40,25 +40,17 @@ jobs:
           platform
           platform db:dump -p $PLATFORM_PROJECT_ID -e $PLATFORM_BRANCH -f ../dump.psql
 
-      - name: Prepare CMS
+      - name: Start CMS
         run: |
           cd cms
           touch .env
           docker compose up db -d
 
-      - name: Clone data and media
-        run: |
-          cd cms
-
           docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < ..
           /dump.psql
 
-          docker compose exec cli platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
-          docker compose exec cli chmod -fR 777 media
-
-      - name: Start CMS
-        run: |
-          cd cms
+          platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
+          # docker compose exec cli chmod -fR 777 media
           docker compose up web -d
 
       - name: Start frontend
