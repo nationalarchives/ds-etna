@@ -19,6 +19,16 @@ jobs:
       PLATFORMSH_CLI_NO_INTERACTION: 1
       PLATFORMSH_CLI_TOKEN: ${{ secrets.PLATFORMSH_CLI_TOKEN }}
     steps:
+
+
+      - name: Install Platform.sh CLI
+        run: |
+          cd cms
+          curl -fsSL https://raw.githubusercontent.com/platformsh/cli/main/installer.sh | bash
+          platform auth:api-token-login
+          platform db:dump -p $PLATFORM_PROJECT_ID -e $PLATFORM_BRANCH -f dump.psql -d database_dumps
+
+
       - uses: actions/checkout@v4
         with:
           repository: nationalarchives/ds-etna-frontend
@@ -37,13 +47,6 @@ jobs:
         with:
           repository: nationalarchives/ds-wagtail
           path: cms
-
-      - name: Install Platform.sh CLI
-        run: |
-          cd cms
-          curl -fsSL https://raw.githubusercontent.com/platformsh/cli/main/installer.sh | bash
-          platform
-          platform db:dump -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -f dump.psql -d database_dumps
 
       - name: Prepare CMS
         run: |
