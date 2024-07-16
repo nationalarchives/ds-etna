@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          repository: https://github.com/nationalarchives/ds-etna-frontend
+          repository: nationalarchives/ds-etna-frontend
           path: frontend
       - name: Start frontend
         run: |
@@ -32,7 +32,7 @@ jobs:
           curl --silent http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
       - uses: actions/checkout@v4
         with:
-          repository: https://github.com/nationalarchives/ds-wagtail
+          repository: nationalarchives/ds-wagtail
           path: cms
       - name: Start CMS
         run: |
