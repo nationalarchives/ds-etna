@@ -19,13 +19,12 @@ jobs:
       - name: Start frontend
         run: |
           cd frontend
-          docker compose up -d
+          docker compose up app -d
       - uses: nev7n/wait_for_response@v1
         with:
-          url: "http://localhost:65535"
-          responseCode: 200
-          timeout: 30000
-          interval: 500
+          url: http://localhost:65535
+          responseCode: 502
+          timeout: 60000
       - name: Check
         run: >
           curl --silent http://localhost:65535/healthcheck/live/ | grep 'ok' &&
@@ -37,10 +36,11 @@ jobs:
       - name: Start CMS
         run: |
           cd cms
-          docker compose up -d
+          docker compose up web -d
       - uses: nev7n/wait_for_response@v1
         with:
-          url: "http://localhost:8000"
-          responseCode: 200
-          timeout: 30000
-          interval: 500
+          url: http://localhost:8000/admin/
+          timeout: 60000
+      - name: Check
+        run: >
+          curl --silent http://localhost:65535/ | grep 'something'
