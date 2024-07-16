@@ -19,7 +19,7 @@ jobs:
       - name: Start frontend
         run: |
           cd frontend
-          docker up -d
+          docker compose up -d
       - uses: nev7n/wait_for_response@v1
         with:
           url: "http://localhost:65535"
@@ -37,7 +37,7 @@ jobs:
       - name: Start CMS
         run: |
           cd cms
-          docker up -d
+          docker compose up -d
       - uses: nev7n/wait_for_response@v1
         with:
           url: "http://localhost:8000"
