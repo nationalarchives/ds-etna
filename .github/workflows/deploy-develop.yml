@@ -22,12 +22,10 @@ jobs:
           docker compose up app -d
       - uses: nev7n/wait_for_response@v1
         with:
-          url: http://localhost:65535
-          responseCode: 502
+          url: http://localhost:65535/healthcheck/live/
           timeout: 60000
       - name: Check
         run: >
-          curl --silent http://localhost:65535/healthcheck/live/ | grep 'ok' &&
           curl --silent http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
       - uses: actions/checkout@v4
         with:
@@ -36,10 +34,11 @@ jobs:
       - name: Start CMS
         run: |
           cd cms
+          touch .env
           docker compose up web -d
       - uses: nev7n/wait_for_response@v1
         with:
-          url: http://localhost:8000/admin/
+          url: http://localhost:8000/healthcheck/live/
           timeout: 60000
       - name: Check
         run: >
