@@ -11,6 +11,11 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      COPY_ENV: main
+      DATABASE_NAME: test
+      DATABASE_USER: test
+      PLATFORM_PROJECT_ID: rasrzs7pi6sd4
     steps:
       - uses: actions/checkout@v4
         with:
@@ -23,7 +28,6 @@ jobs:
       - uses: nev7n/wait_for_response@v1
         with:
           url: http://localhost:65535/healthcheck/live/
-          timeout: 60000
       - name: Check
         run: >
           curl --silent http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
@@ -39,7 +43,43 @@ jobs:
       - uses: nev7n/wait_for_response@v1
         with:
           url: http://localhost:8000/healthcheck/live/
-          timeout: 60000
+
+      - name: Start CMS
+        run: |
+          cd cms
+
+          docker compose exec cli platform db:dump -e $COPY_ENV -p $PLATFORM_PROJECT_ID -f dump.psql -d database_dumps
+
+          docker compose stop web
+          docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < app/database_dumps/dump.psql
+
+          docker compose up web -d
+
+
+          docker compose exec cli platform mount:download -e $COPY_ENV -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
+          docker compose exec cli chmod -fR 777 media
+
+
+      - uses: nev7n/wait_for_response@v1
+        with:
+          url: http://localhost:8000/healthcheck/live/
+  
+
+
+      # - name: Check
+      #   run: >
+      #     curl --silent http://localhost:65535/ | grep 'something'
+      - uses: actions/checkout@v4
+        with:
+          repository: nationalarchives/ds-etna-search
+          path: search
+      - name: Start search
+        run: |
+          cd search
+          docker compose up app -d
+      - uses: nev7n/wait_for_response@v1
+        with:
+          url: http://localhost:65534/healthcheck/live/
       - name: Check
         run: >
-          curl --silent http://localhost:65535/ | grep 'something'
+          curl --silent http://localhost:65534/docs | grep '<title>ETNA Search API - Swagger UI</title>'
