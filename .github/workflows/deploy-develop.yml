@@ -38,7 +38,7 @@ jobs:
           cd cms
           curl -fsSL https://raw.githubusercontent.com/platformsh/cli/main/installer.sh | bash
           platform
-          platform db:dump -p $PLATFORM_PROJECT_ID -e $PLATFORM_BRANCH -f ../dump.psql
+          platform db:dump -p $PLATFORM_PROJECT_ID -e $PLATFORM_BRANCH -d .. -f dump.psql
 
       - name: Start CMS
         run: |
