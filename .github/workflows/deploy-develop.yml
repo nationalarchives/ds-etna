@@ -45,6 +45,7 @@ jobs:
         run: |
           cd cms
 
+          docker compose exec cli platform login
           docker compose exec cli platform db:dump -e $COPY_ENV -p $PLATFORM_PROJECT_ID -f dump.psql -d database_dumps
 
           docker compose stop web
