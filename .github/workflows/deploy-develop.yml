@@ -35,16 +35,12 @@ jobs:
         with:
           repository: nationalarchives/ds-wagtail
           path: cms
-      - name: Start CMS
+
+      - name: Prepare CMS
         run: |
           cd cms
           touch .env
-          docker compose up web -d
-      - uses: nev7n/wait_for_response@v1
-        with:
-          url: http://localhost:8000/healthcheck/live/
-
-      - name: Start CMS
+      - name: Clone data and media
         run: |
           cd cms
 
@@ -53,13 +49,13 @@ jobs:
           docker compose stop web
           docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < app/database_dumps/dump.psql
 
-          docker compose up web -d
-
-
           docker compose exec cli platform mount:download -e $COPY_ENV -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
           docker compose exec cli chmod -fR 777 media
 
-
+      - name: Start CMS
+        run: |
+          cd cms
+          docker compose up web -d
       - uses: nev7n/wait_for_response@v1
         with:
           url: http://localhost:8000/healthcheck/live/
