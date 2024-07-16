@@ -12,10 +12,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      COPY_ENV: main
+      PLATFORM_BRANCH: main
       DATABASE_NAME: test
       DATABASE_USER: test
       PLATFORM_PROJECT_ID: rasrzs7pi6sd4
+      PLATFORMSH_CLI_NO_INTERACTION: 1
     steps:
       - uses: actions/checkout@v4
         with:
@@ -36,22 +37,28 @@ jobs:
           repository: nationalarchives/ds-wagtail
           path: cms
 
+      - name: Install Platform.sh CLI
+        run: |
+          cd cms
+          curl -fsSL https://raw.githubusercontent.com/platformsh/cli/main/installer.sh | bash
+          platform login
+          platform db:dump -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -f dump.psql -d database_dumps
+
       - name: Prepare CMS
         run: |
           cd cms
           touch .env
-          docker compose up cli -d
+          docker compose up db -d
       - name: Clone data and media
         run: |
           cd cms
 
-          docker compose exec cli platform login
-          docker compose exec cli platform db:dump -e $COPY_ENV -p $PLATFORM_PROJECT_ID -f dump.psql -d database_dumps
-
-          docker compose stop web
+          # docker compose exec cli platform login
+          # docker compose exec cli platform db:dump -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -f dump.psql -d database_dumps
+          # docker compose stop web
           docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < app/database_dumps/dump.psql
 
-          docker compose exec cli platform mount:download -e $COPY_ENV -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
+          docker compose exec cli platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
           docker compose exec cli chmod -fR 777 media
 
       - name: Start CMS
