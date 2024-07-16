@@ -38,7 +38,7 @@ jobs:
           cd cms
           curl -fsSL https://raw.githubusercontent.com/platformsh/cli/main/installer.sh | bash
           platform
-          platform db:dump -p $PLATFORM_PROJECT_ID -e $PLATFORM_BRANCH -f dump.psql -d database_dumps
+          platform db:dump -p $PLATFORM_PROJECT_ID -e $PLATFORM_BRANCH -f ../dump.psql -d database_dumps
 
 
       - name: Start frontend
@@ -61,10 +61,7 @@ jobs:
         run: |
           cd cms
 
-          # docker compose exec cli platform login
-          # docker compose exec cli platform db:dump -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -f dump.psql -d database_dumps
-          # docker compose stop web
-          docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < app/database_dumps/dump.psql
+          docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < ../database_dumps/dump.psql
 
           docker compose exec cli platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
           docker compose exec cli chmod -fR 777 media
