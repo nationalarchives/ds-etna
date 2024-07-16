@@ -1,0 +1,46 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - proof-of-concept
+
+concurrency:
+  group: test-${{ github.ref }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: https://github.com/nationalarchives/ds-etna-frontend
+          path: frontend
+      - name: Start frontend
+        run: |
+          cd frontend
+          docker up -d
+      - uses: nev7n/wait_for_response@v1
+        with:
+          url: "http://localhost:65535"
+          responseCode: 200
+          timeout: 30000
+          interval: 500
+      - name: Check
+        run: >
+          curl --silent http://localhost:65535/healthcheck/live/ | grep 'ok' &&
+          curl --silent http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
+      - uses: actions/checkout@v4
+        with:
+          repository: https://github.com/nationalarchives/ds-wagtail
+          path: cms
+      - name: Start CMS
+        run: |
+          cd cms
+          docker up -d
+      - uses: nev7n/wait_for_response@v1
+        with:
+          url: "http://localhost:8000"
+          responseCode: 200
+          timeout: 30000
+          interval: 500
