@@ -38,8 +38,28 @@ jobs:
           cd cms
           curl -fsSL https://raw.githubusercontent.com/platformsh/cli/main/installer.sh | bash
           platform
-          platform db:dump -p $PLATFORM_PROJECT_ID -e $PLATFORM_BRANCH -f ../dump.psql -d database_dumps
+          platform db:dump -p $PLATFORM_PROJECT_ID -e $PLATFORM_BRANCH -f ../dump.psql
 
+      - name: Prepare CMS
+        run: |
+          cd cms
+          touch .env
+          docker compose up db -d
+
+      - name: Clone data and media
+        run: |
+          cd cms
+
+          docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < ..
+          /dump.psql
+
+          docker compose exec cli platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
+          docker compose exec cli chmod -fR 777 media
+
+      - name: Start CMS
+        run: |
+          cd cms
+          docker compose up web -d
 
       - name: Start frontend
         run: |
@@ -52,24 +72,6 @@ jobs:
         run: >
           curl --silent http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
 
-      - name: Prepare CMS
-        run: |
-          cd cms
-          touch .env
-          docker compose up db -d
-      - name: Clone data and media
-        run: |
-          cd cms
-
-          docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < ../database_dumps/dump.psql
-
-          docker compose exec cli platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
-          docker compose exec cli chmod -fR 777 media
-
-      - name: Start CMS
-        run: |
-          cd cms
-          docker compose up web -d
       - uses: nev7n/wait_for_response@v1
         with:
           url: http://localhost:8000/healthcheck/live/
