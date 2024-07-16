@@ -17,6 +17,7 @@ jobs:
       DATABASE_USER: test
       PLATFORM_PROJECT_ID: rasrzs7pi6sd4
       PLATFORMSH_CLI_NO_INTERACTION: 1
+      PLATFORMSH_CLI_TOKEN: ${{ secrets.PLATFORMSH_CLI_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -41,7 +42,7 @@ jobs:
         run: |
           cd cms
           curl -fsSL https://raw.githubusercontent.com/platformsh/cli/main/installer.sh | bash
-          platform login
+          platform
           platform db:dump -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -f dump.psql -d database_dumps
 
       - name: Prepare CMS
