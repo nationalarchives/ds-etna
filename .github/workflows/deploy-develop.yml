@@ -40,16 +40,34 @@ jobs:
           platform
           platform db:dump -p $PLATFORM_PROJECT_ID -e $PLATFORM_BRANCH -f dump.psql
 
-      - name: Start CMS
+
+      - name: Start DB
         run: |
           cd cms
           touch .env
           docker compose up db -d
 
+          
+      - name: Migrate DB
+        run: |
+          cd cms
+          ls -alh
+          cat dump.psql
           docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < dump.psql
 
           platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
-          # docker compose exec cli chmod -fR 777 media
+          
+      - name: Migrate media
+        run: |
+          cd cms
+          platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
+          docker compose up cli
+          docker compose exec cli chmod -fR 777 media
+          docker compose stop cli
+
+      - name: Start CMS
+        run: |
+          cd cms
           docker compose up web -d
 
       - name: Start frontend
