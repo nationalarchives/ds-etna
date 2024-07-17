@@ -47,6 +47,12 @@ jobs:
           cd cms
           touch .env
           docker compose up db -d
+      - name: Wait for DB
+        run: |
+          cd cms
+          docker compose exec db pg_isready
+          sleep 5
+          docker compose exec db pg_isready
       - name: Migrate DB
         run: |
           cd cms
