@@ -19,44 +19,39 @@ jobs:
       PLATFORMSH_CLI_NO_INTERACTION: 1
       PLATFORMSH_CLI_TOKEN: ${{ secrets.PLATFORMSH_CLI_TOKEN }}
     steps:
-
-      - uses: actions/checkout@v4
+      - name: Clone frontend
+        uses: actions/checkout@v4
         with:
           repository: nationalarchives/ds-etna-frontend
           path: frontend
-      - uses: actions/checkout@v4
+      - name: Clone CMS
+        uses: actions/checkout@v4
         with:
           repository: nationalarchives/ds-wagtail
           path: cms
-      - uses: actions/checkout@v4
+      - name: Clone search API
+        uses: actions/checkout@v4
         with:
           repository: nationalarchives/ds-etna-search
           path: search
-
       - name: Install Platform.sh CLI
         run: |
-          cd cms
           curl -fsSL https://raw.githubusercontent.com/platformsh/cli/main/installer.sh | bash
           platform
+      - name: Get DB dump
+        run: |
+          cd cms
           platform db:dump -p $PLATFORM_PROJECT_ID -e $PLATFORM_BRANCH -f dump.psql
-
-
       - name: Start DB
         run: |
           cd cms
           touch .env
           docker compose up db -d
-
-          
       - name: Migrate DB
         run: |
           cd cms
           ls -alh
-          cat dump.psql
           docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < dump.psql
-
-          platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
-          
       - name: Migrate media
         run: |
           cd cms
@@ -64,39 +59,33 @@ jobs:
           docker compose up cli
           docker compose exec cli chmod -fR 777 media
           docker compose stop cli
-
       - name: Start CMS
         run: |
           cd cms
           docker compose up web -d
-
       - name: Start frontend
         run: |
           cd frontend
           docker compose up app -d
-      - uses: nev7n/wait_for_response@v1
-        with:
-          url: http://localhost:65535/healthcheck/live/
-      - name: Check
-        run: >
-          curl --silent http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
-
-      - uses: nev7n/wait_for_response@v1
-        with:
-          url: http://localhost:8000/healthcheck/live/
-  
-
-
-      # - name: Check
-      #   run: >
-      #     curl --silent http://localhost:65535/ | grep 'something'
       - name: Start search
         run: |
           cd search
           docker compose up app -d
-      - uses: nev7n/wait_for_response@v1
+      - name: Wait for frontend
+        uses: nev7n/wait_for_response@v1
+        with:
+          url: http://localhost:65535/healthcheck/live/
+      - name: Wait for CMS
+        uses: nev7n/wait_for_response@v1
+        with:
+          url: http://localhost:8000/healthcheck/live/
+      - name: Wait for search API
+        uses: nev7n/wait_for_response@v1
         with:
           url: http://localhost:65534/healthcheck/live/
-      - name: Check
+      - name: Check frontend
+        run: >
+          curl --silent http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
+      - name: Check frontend with CMS
         run: >
           curl --silent http://localhost:65534/docs | grep '<title>ETNA Search API - Swagger UI</title>'
