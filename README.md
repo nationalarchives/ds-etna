@@ -21,3 +21,8 @@ docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certb
 # Renew cert
 docker compose run --rm certbot renew
 ```
+
+```sh
+npx playwright test
+npx playwright test --ui
+```
