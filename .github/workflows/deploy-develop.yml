@@ -50,9 +50,7 @@ jobs:
       - name: Wait for DB
         run: |
           cd cms
-          docker compose exec db pg_isready
-          sleep 5
-          docker compose exec db pg_isready
+          until docker compose exec db pg_isready | grep -q '/var/run/postgresql:5432 - accepting connections'; do sleep 2; done
       - name: Migrate DB
         run: |
           cd cms
