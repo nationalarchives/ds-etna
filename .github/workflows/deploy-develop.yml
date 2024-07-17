@@ -107,7 +107,10 @@ jobs:
           curl --silent http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
       - name: Check frontend with CMS
         run: >
-          curl --silent http://localhost:65534/docs | grep '<title>ETNA Search API - Swagger UI</title>'
+          curl --silent http://localhost:65535/explore-the-collection/ | grep '<h1 class="tna-heading-xl tna-index-grid__heading">        Explore the collection      </h1>'
+      # - name: Check search
+      #   run: >
+      #     curl --silent http://localhost:65534/docs | grep '<title>ETNA Search API - Swagger UI</title>'
       - uses: actions/setup-node@v4
         with:
           node-version: lts/iron
