@@ -61,7 +61,7 @@ jobs:
         run: |
           cd cms
           platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
-          docker compose up cli
+          docker compose up cli -d
           docker compose exec cli chmod -fR 777 media
           docker compose stop cli
       - name: Start CMS
