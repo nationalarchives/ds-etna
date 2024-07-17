@@ -47,6 +47,20 @@ jobs:
         run: |
           cd cms
           touch .env
+          echo "DATABASE_ENGINE=django.db.backends.postgresql" >> .env
+          echo "DATABASE_NAME=$DATABASE_NAME" >> .env
+          echo "DATABASE_USER=$DATABASE_USER" >> .env
+          echo "DATABASE_HOST=db" >> .env
+          echo "KONG_CLIENT_BASE_URL=http://kong/api/v1/data" >> .env
+          echo "KONG_IMAGE_PREVIEW_BASE_URL=http://ciim-media/preview/" >> .env
+          echo "KONG_CLIENT_KEY=abc123" >> .env
+          echo "KONG_CLIENT_VERIFY_CERTIFICATES=False" >> .env
+          echo "KONG_CLIENT_TEST_MODE=True" >> .env
+          echo "KONG_CLIENT_TEST_FILENAME=records.json" >> .env
+          # echo "PLATFORM_PROJECT_ID=$PLATFORM_PROJECT_ID" >> .env
+          # echo "PLATFORMSH_CLI_TOKEN=abc123" >> .env
+          echo "DEBUG_TOOLBAR_ENABLED=False" >> .env
+          echo "API_CLIENT_NAME_PREFIX=ROSETTA_DEV" >> .env
           docker compose up db -d
       - name: Wait for DB
         run: |
