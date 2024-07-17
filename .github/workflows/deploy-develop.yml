@@ -51,7 +51,7 @@ jobs:
           echo "DATABASE_NAME=$DATABASE_NAME" >> .env
           echo "DATABASE_USER=$DATABASE_USER" >> .env
           echo "DATABASE_HOST=db" >> .env
-          echo "KONG_CLIENT_BASE_URL=http://kong/api/v1/data" >> .env
+          echo "KONG_CLIENT_BASE_URL=https://aa83a1e6831944fa8bcf17f5ce391b73-58be9fd587cba13e.elb.eu-west-2.amazonaws.com/api/v1/data" >> .env
           echo "KONG_IMAGE_PREVIEW_BASE_URL=http://ciim-media/preview/" >> .env
           echo "KONG_CLIENT_KEY=abc123" >> .env
           echo "KONG_CLIENT_VERIFY_CERTIFICATES=False" >> .env
@@ -108,6 +108,7 @@ jobs:
       - name: Check frontend with CMS
         run: |
           cd cms
+          docker logs web
           curl --silent http://localhost:8000/api/v2/pages/ || echo "Nope"
           docker logs web
           curl --silent http://localhost:8000/api/v2/pages/5
