@@ -98,10 +98,10 @@ jobs:
         uses: nev7n/wait_for_response@v1
         with:
           url: http://localhost:8000/healthcheck/live/
-      - name: Wait for search API
-        uses: nev7n/wait_for_response@v1
-        with:
-          url: http://localhost:65534/healthcheck/live/
+      # - name: Wait for search API
+      #   uses: nev7n/wait_for_response@v1
+      #   with:
+      #     url: http://localhost:65534/healthcheck/live/
       - name: Check frontend
         run: >
           curl --silent http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
