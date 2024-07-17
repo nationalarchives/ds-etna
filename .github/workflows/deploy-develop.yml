@@ -15,6 +15,7 @@ jobs:
       PLATFORM_BRANCH: main
       DATABASE_NAME: postgres
       DATABASE_USER: postgres
+      KONG_CLIENT_KEY: ${{ secrets.KONG_CLIENT_KEY }}
       PLATFORM_PROJECT_ID: rasrzs7pi6sd4
       PLATFORMSH_CLI_NO_INTERACTION: 1
       PLATFORMSH_CLI_TOKEN: ${{ secrets.PLATFORMSH_CLI_TOKEN }}
@@ -53,7 +54,7 @@ jobs:
           echo "DATABASE_HOST=db" >> .env
           echo "KONG_CLIENT_BASE_URL=https://aa83a1e6831944fa8bcf17f5ce391b73-58be9fd587cba13e.elb.eu-west-2.amazonaws.com/api/v1/data" >> .env
           echo "KONG_IMAGE_PREVIEW_BASE_URL=http://ciim-media/preview/" >> .env
-          echo "KONG_CLIENT_KEY=abc123" >> .env
+          echo "KONG_CLIENT_KEY=$KONG_CLIENT_KEY" >> .env
           echo "KONG_CLIENT_VERIFY_CERTIFICATES=False" >> .env
           echo "KONG_CLIENT_TEST_MODE=True" >> .env
           echo "KONG_CLIENT_TEST_FILENAME=records.json" >> .env
