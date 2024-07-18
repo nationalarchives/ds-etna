@@ -69,13 +69,13 @@ jobs:
           docker compose up db -d
           until docker compose exec db pg_isready | grep -q '/var/run/postgresql:5432 - accepting connections'; do sleep 2; done
           docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < dump.psql
-      - name: Migrate media
-        run: |
-          cd cms
-          platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
-          docker compose up cli -d
-          docker compose exec cli chmod -fR 777 media
-          docker compose stop cli
+      # - name: Migrate media
+      #   run: |
+      #     cd cms
+      #     platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
+      #     docker compose up cli -d
+      #     docker compose exec cli chmod -fR 777 media
+      #     docker compose stop cli
       - name: Start CMS
         run: |
           cd cms
