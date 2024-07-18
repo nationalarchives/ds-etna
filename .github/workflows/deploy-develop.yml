@@ -28,6 +28,21 @@ jobs:
           path: frontend
 
 
+      - name: Clone CMS
+        uses: actions/checkout@v4
+        with:
+          repository: nationalarchives/ds-wagtail
+          path: cms
+      - name: Clone search API
+        uses: actions/checkout@v4
+        with:
+          repository: nationalarchives/ds-etna-search
+          path: search
+
+
+
+
+
       - name: Install yq
         uses: dcarbone/install-yq-action@v1.1.1
 
@@ -53,16 +68,8 @@ jobs:
           SEARCH_VERSION=$(yq '.services.search.image' < ../docker-compose.yml) yq -i '.services.app.image = strenv(SEARCH_VERSION) | del(.services.app.build)' docker-compose.yml
           cat docker-compose.yml
 
-      - name: Clone CMS
-        uses: actions/checkout@v4
-        with:
-          repository: nationalarchives/ds-wagtail
-          path: cms
-      - name: Clone search API
-        uses: actions/checkout@v4
-        with:
-          repository: nationalarchives/ds-etna-search
-          path: search
+
+
       - name: Install Platform.sh CLI
         run: |
           curl -fsSL https://raw.githubusercontent.com/platformsh/cli/main/installer.sh | bash
