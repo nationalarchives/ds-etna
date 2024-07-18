@@ -42,6 +42,7 @@ jobs:
         run: |
           cd frontend
           FRONTEND_VERSION=$(yq '.services.frontend.image' < ../docker-compose.yml) yq -i '.services.app.image = strenv(FRONTEND_VERSION) | del(.services.app.build) | del(.services.app.volumes)' docker-compose.yml
+          # TODO: Update ENVIRONMENT and CONFIG environment variables
           cat docker-compose.yml
       - name: Update cms docker-compose.yml
         run: |
@@ -97,6 +98,8 @@ jobs:
           docker compose up dev -d
           docker compose exec dev manage migrate
           docker compose stop dev
+          sleep 10
+          docker compose logs web
       - name: Start search
         run: |
           cd search
