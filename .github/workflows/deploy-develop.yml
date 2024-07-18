@@ -26,6 +26,33 @@ jobs:
         with:
           repository: nationalarchives/ds-etna-frontend
           path: frontend
+
+
+      - name: Install yq
+        uses: dcarbone/install-yq-action@v1.1.1
+
+      - name: Update frontend docker-compose
+        run: |
+          cd frontend
+          cat docker-compose.yml
+          FRONTEND_VERSION=$(yq '.services.frontend.image' < ../docker-compose.yml) yq -i '.services.app.image = strenv(FRONTEND_VERSION) | del(.services.app.build)' docker-compose.yml
+          cat docker-compose.yml
+
+
+      - name: Update cms docker-compose
+        run: |
+          cd cms
+          cat docker-compose.yml
+          CMS_VERSION=$(yq '.services.cms.image' < ../docker-compose.yml) yq -i '.services.web.image = strenv(CMS_VERSION) | del(.services.web.build)' docker-compose.yml
+          cat docker-compose.yml
+
+      - name: Update search docker-compose
+        run: |
+          cd search
+          cat docker-compose.yml
+          SEARCH_VERSION=$(yq '.services.search.image' < ../docker-compose.yml) yq -i '.services.app.image = strenv(SEARCH_VERSION) | del(.services.app.build)' docker-compose.yml
+          cat docker-compose.yml
+
       - name: Clone CMS
         uses: actions/checkout@v4
         with:
