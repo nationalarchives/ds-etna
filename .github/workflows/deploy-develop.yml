@@ -124,6 +124,7 @@ jobs:
         run: |
           cd frontend
           docker compose up app -d
+          docker compose logs app
       - name: Start search
         run: |
           cd search
