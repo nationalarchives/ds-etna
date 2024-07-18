@@ -47,7 +47,7 @@ jobs:
       - name: Update cms docker-compose.yml
         run: |
           cd cms
-          CMS_VERSION=$(yq '.services.cms.image' < ../docker-compose.yml) yq -i '.services.web.image = strenv(CMS_VERSION) | del(.services.web.build) | del(.services.web.volumes) | .services.web.volumes = ["media:/media"] | del(.services.web.command) | (.services.app.environment[] | select(. == "ENVIRONMENT=*")) = "ENVIRONMENT=staging" | .services.web.environment += "SECRET_KEY=abc123"' docker-compose.yml
+          CMS_VERSION=$(yq '.services.cms.image' < ../docker-compose.yml) yq -i '.services.web.image = strenv(CMS_VERSION) | del(.services.web.build) | del(.services.web.volumes) | .services.web.volumes = ["media:/media"] | del(.services.web.command) | (.services.web.environment[] | select(. == "ENVIRONMENT=*")) = "ENVIRONMENT=staging" | .services.web.environment += "SECRET_KEY=abc123"' docker-compose.yml
           cat docker-compose.yml
       - name: Update search docker-compose.yml
         run: |
