@@ -83,6 +83,7 @@ jobs:
         run: |
           cd cms
           docker compose up web -d
+          # docker compose exec web mkdir -p /app/templates/static/assets
       - name: Start frontend
         run: |
           cd frontend
@@ -110,11 +111,10 @@ jobs:
         run: |
           cd cms
           docker logs web
-          curl --silent http://localhost:8000/api/v2/pages/ || echo "Nope"
-          docker logs web
-          curl --silent http://localhost:8000/api/v2/pages/5
           curl --silent http://localhost:65535/explore-the-collection/
+          docker logs web
           curl --silent http://localhost:65535/explore-the-collection/ | grep 'What might you find in The National Archives? Browse picture galleries, stories and in-depth articles from our experts about some of our most famous records and hidden gems.'
+          docker logs web
       # - name: Check search
       #   run: |
       #     curl --silent http://localhost:65534/docs | grep '<title>ETNA Search API - Swagger UI</title>'
