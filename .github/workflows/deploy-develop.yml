@@ -41,7 +41,7 @@ jobs:
       - name: Update frontend docker-compose.yml
         run: |
           cd frontend
-          FRONTEND_VERSION=$(yq '.services.frontend.image' < ../docker-compose.yml) yq -i '.services.app.image = strenv(FRONTEND_VERSION) | del(.services.app.build) | del(.services.app.volumes) | (.services.app.environment[] | select(. == "ENVIRONMENT=*")) = "ENVIRONMENT=staging" | (.services.app.environment[] | select(. == "CONFIG=*")) = "CONFIG=config.Staging"' docker-compose.yml
+          FRONTEND_VERSION=$(yq '.services.frontend.image' < ../docker-compose.yml) yq -i '.services.app.image = strenv(FRONTEND_VERSION) | del(.services.app.build) | del(.services.app.volumes) | (.services.app.environment[] | select(. == "ENVIRONMENT=*")) = "ENVIRONMENT=staging" | (.services.app.environment[] | select(. == "CONFIG=*")) = "CONFIG=config.Staging" | .services.app.environment += "FORCE_HTTPS=False"' docker-compose.yml
           # TODO: Update ENVIRONMENT and CONFIG environment variables
           cat docker-compose.yml
       - name: Update cms docker-compose.yml
@@ -95,11 +95,12 @@ jobs:
           # echo "PLATFORMSH_CLI_TOKEN=abc123" >> .env
           echo "DEBUG_TOOLBAR_ENABLED=False" >> .env
           echo "API_CLIENT_NAME_PREFIX=ROSETTA_DEV" >> .env
+          
           docker compose up web -d
 
-          docker compose up dev -d
-          docker compose exec dev manage migrate
-          docker compose stop dev
+          # docker compose up dev -d
+          # docker compose exec dev manage migrate
+          # docker compose stop dev
 
           # docker compose exec web poetry run python /app/manage.py migrate
           
