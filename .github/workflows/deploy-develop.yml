@@ -109,19 +109,23 @@ jobs:
       - name: Check frontend
         run: |
           curl --silent http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
-      - name: Check frontend with CMS
+      - name: Check frontend with CMS - debug
         run: |
           cd cms
           docker logs web
           curl --silent http://localhost:65535/explore-the-collection/
           docker logs web
-
-          cd ../frontend
+      - name: Check frontend logs
+        run: |
+          cd frontend
+          docker ps
           docker logs ds-etna-frontend-app-1
           
+      - name: Check frontend with CMS
+        run: |
+          cd cms
           curl --silent http://localhost:65535/explore-the-collection/ | grep 'What might you find in The National Archives? Browse picture galleries, stories and in-depth articles from our experts about some of our most famous records and hidden gems.'
           
-          cd ../cms
           docker logs web
       # - name: Check search
       #   run: |
