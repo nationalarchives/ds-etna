@@ -80,6 +80,7 @@ jobs:
         run: |
           cd cms
           touch .env
+          echo "SECRET_KEY=abc123" >> .env
           echo "DATABASE_ENGINE=django.db.backends.postgresql" >> .env
           echo "DATABASE_NAME=$DATABASE_NAME" >> .env
           echo "DATABASE_USER=$DATABASE_USER" >> .env
