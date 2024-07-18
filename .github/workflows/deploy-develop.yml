@@ -97,11 +97,11 @@ jobs:
           echo "API_CLIENT_NAME_PREFIX=ROSETTA_DEV" >> .env
           docker compose up web -d
 
-          # docker compose up dev -d
-          # docker compose exec dev manage migrate
-          # docker compose stop dev
+          docker compose up dev -d
+          docker compose exec dev manage migrate
+          docker compose stop dev
 
-          docker compose exec web poetry run python /app/manage.py migrate
+          # docker compose exec web poetry run python /app/manage.py migrate
           
           sleep 10
           docker compose logs web
