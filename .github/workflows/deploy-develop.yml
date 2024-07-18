@@ -113,7 +113,13 @@ jobs:
           docker logs web
           curl --silent http://localhost:65535/explore-the-collection/
           docker logs web
+          
+          cd ../frontend
+          docker logs app
+          
           curl --silent http://localhost:65535/explore-the-collection/ | grep 'What might you find in The National Archives? Browse picture galleries, stories and in-depth articles from our experts about some of our most famous records and hidden gems.'
+          
+          cd ../cms
           docker logs web
       # - name: Check search
       #   run: |
