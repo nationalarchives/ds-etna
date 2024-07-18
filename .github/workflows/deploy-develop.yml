@@ -105,6 +105,7 @@ jobs:
         run: |
           cd search
           docker compose up app -d
+          sleep 10
           docker compose logs app
       - name: Start frontend
         run: |
