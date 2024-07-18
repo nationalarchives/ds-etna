@@ -121,10 +121,10 @@ jobs:
         uses: nev7n/wait_for_response@v1
         with:
           url: http://localhost:8000/healthcheck/live/
-      - name: Wait for search API
-        uses: nev7n/wait_for_response@v1
-        with:
-          url: http://localhost:65534/healthcheck/live/
+      # - name: Wait for search API
+      #   uses: nev7n/wait_for_response@v1
+      #   with:
+      #     url: http://localhost:65534/healthcheck/live/
       - name: Wait for frontend
         uses: nev7n/wait_for_response@v1
         with:
