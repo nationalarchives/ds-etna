@@ -26,8 +26,6 @@ jobs:
         with:
           repository: nationalarchives/ds-etna-frontend
           path: frontend
-
-
       - name: Clone CMS
         uses: actions/checkout@v4
         with:
@@ -38,38 +36,23 @@ jobs:
         with:
           repository: nationalarchives/ds-etna-search
           path: search
-
-
-
-
-
       - name: Install yq
         uses: dcarbone/install-yq-action@v1.1.1
-
-      - name: Update frontend docker-compose
+      - name: Update frontend docker-compose.yml
         run: |
           cd frontend
-          cat docker-compose.yml
           FRONTEND_VERSION=$(yq '.services.frontend.image' < ../docker-compose.yml) yq -i '.services.app.image = strenv(FRONTEND_VERSION) | del(.services.app.build)' docker-compose.yml
           cat docker-compose.yml
-
-
-      - name: Update cms docker-compose
+      - name: Update cms docker-compose.yml
         run: |
           cd cms
-          cat docker-compose.yml
           CMS_VERSION=$(yq '.services.cms.image' < ../docker-compose.yml) yq -i '.services.web.image = strenv(CMS_VERSION) | del(.services.web.build)' docker-compose.yml
           cat docker-compose.yml
-
-      - name: Update search docker-compose
+      - name: Update search docker-compose.yml
         run: |
           cd search
-          cat docker-compose.yml
           SEARCH_VERSION=$(yq '.services.search.image' < ../docker-compose.yml) yq -i '.services.app.image = strenv(SEARCH_VERSION) | del(.services.app.build)' docker-compose.yml
           cat docker-compose.yml
-
-
-
       - name: Install Platform.sh CLI
         run: |
           curl -fsSL https://raw.githubusercontent.com/platformsh/cli/main/installer.sh | bash
@@ -77,8 +60,22 @@ jobs:
       - name: Get DB dump
         run: |
           cd cms
+          touch .env
           platform db:dump -p $PLATFORM_PROJECT_ID -e $PLATFORM_BRANCH -f dump.psql
-      - name: Start DB
+      - name: Start DB and migrate data
+        run: |
+          cd cms
+          docker compose up db -d
+          until docker compose exec db pg_isready | grep -q '/var/run/postgresql:5432 - accepting connections'; do sleep 2; done
+          docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < dump.psql
+      - name: Migrate media
+        run: |
+          cd cms
+          platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
+          docker compose up cli -d
+          docker compose exec cli chmod -fR 777 media
+          docker compose stop cli
+      - name: Start CMS
         run: |
           cd cms
           touch .env
@@ -96,51 +93,33 @@ jobs:
           # echo "PLATFORMSH_CLI_TOKEN=abc123" >> .env
           echo "DEBUG_TOOLBAR_ENABLED=False" >> .env
           echo "API_CLIENT_NAME_PREFIX=ROSETTA_DEV" >> .env
-          docker compose up db -d
-      - name: Wait for DB
-        run: |
-          cd cms
-          until docker compose exec db pg_isready | grep -q '/var/run/postgresql:5432 - accepting connections'; do sleep 2; done
-      - name: Migrate DB
-        run: |
-          cd cms
-          ls -alh
-          docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < dump.psql
-      - name: Migrate media
-        run: |
-          cd cms
-          platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
-          docker compose up cli -d
-          docker compose exec cli chmod -fR 777 media
-          docker compose stop cli
-      - name: Start CMS
-        run: |
-          cd cms
           docker compose up web -d
-          # docker compose exec web mkdir -p /app/templates/static/assets
           docker compose up dev -d
           docker compose exec dev manage migrate
-      - name: Start frontend
-        run: |
-          cd frontend
-          docker compose up app -d
-          docker compose logs app
+          docker compose stop dev
       - name: Start search
         run: |
           cd search
           docker compose up app -d
-      - name: Wait for frontend
-        uses: nev7n/wait_for_response@v1
-        with:
-          url: http://localhost:65535/healthcheck/live/
+          docker compose logs app
+      - name: Start frontend
+        run: |
+          cd frontend
+          docker compose up app -d
+          sleep 10
+          docker compose logs app
       - name: Wait for CMS
         uses: nev7n/wait_for_response@v1
         with:
           url: http://localhost:8000/healthcheck/live/
-      # - name: Wait for search API
-      #   uses: nev7n/wait_for_response@v1
-      #   with:
-      #     url: http://localhost:65534/healthcheck/live/
+      - name: Wait for search API
+        uses: nev7n/wait_for_response@v1
+        with:
+          url: http://localhost:65534/healthcheck/live/
+      - name: Wait for frontend
+        uses: nev7n/wait_for_response@v1
+        with:
+          url: http://localhost:65535/healthcheck/live/
       - name: Check frontend
         run: |
           curl --silent http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
@@ -153,14 +132,11 @@ jobs:
       - name: Check frontend logs
         run: |
           cd frontend
-          docker ps
           docker compose logs app
-          
       - name: Check frontend with CMS
         run: |
           cd cms
           curl --silent http://localhost:65535/explore-the-collection/ | grep 'What might you find in The National Archives? Browse picture galleries, stories and in-depth articles from our experts about some of our most famous records and hidden gems.'
-          
           docker compose logs web
       # - name: Check search
       #   run: |
