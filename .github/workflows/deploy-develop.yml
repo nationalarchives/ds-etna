@@ -135,15 +135,18 @@ jobs:
       - name: Check frontend
         run: |
           curl --silent http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
-      - name: Check frontend with CMS - debug
+      - name: Check frontend with CMS - debug 1
         run: |
           cd cms
           docker compose logs web
           curl --silent http://localhost:8000/api/v2/pages/find/?html_path=explore-the-collection&format=json
           sleep 2
           docker compose logs web
-          sleep 2
+      - name: Check frontend with CMS - debug 2
+        run: |
+          cd cms
           curl --silent http://localhost:65535/explore-the-collection/
+          sleep 2
           docker compose logs web
       - name: Check frontend logs
         run: |
