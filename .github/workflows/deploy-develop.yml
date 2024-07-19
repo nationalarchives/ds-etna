@@ -87,13 +87,13 @@ jobs:
           docker compose up db -d
           until docker compose exec db pg_isready | grep -q '/var/run/postgresql:5432 - accepting connections'; do sleep 2; done
           docker compose exec db psql -d $DATABASE_NAME -U $DATABASE_USER < dump.psql
-      - name: Migrate media
-        run: |
-          cd cms
-          platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
-          docker compose up cli -d
-          docker compose exec cli chmod -fR 777 media
-          docker compose stop cli
+      # - name: Migrate media
+      #   run: |
+      #     cd cms
+      #     platform mount:download -e $PLATFORM_BRANCH -p $PLATFORM_PROJECT_ID -m media --target=media --exclude='/images/*' --yes
+      #     docker compose up cli -d
+      #     docker compose exec cli chmod -fR 777 media
+      #     docker compose stop cli
       - name: Start CMS
         run: |
           cd cms
@@ -120,10 +120,7 @@ jobs:
           url: http://localhost:65535/healthcheck/live/
       - name: Check frontend
         run: |
-          curl http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
-      - name: Check frontend with CMS
-        run: |
-          cd cms
+          curl --silent http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
           curl --silent http://localhost:65535/explore-the-collection/ | grep 'What might you find in The National Archives? Browse some of our most important and unusual records right here.'
       # - name: Check search
       #   run: |
@@ -131,9 +128,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/iron
-      - name: Install dependencies
+      - name: Install test dependencies
         run: npm ci
-      - name: Install Playwright Browsers
+      - name: Install Playwright browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npx playwright test
