@@ -138,28 +138,28 @@ jobs:
       - name: Check frontend
         run: |
           curl http://localhost:65535/browse/ | grep '<h1 class="tna-heading-xl">Explore 1,000 years of history</h1>'
-      - name: Check frontend with CMS - debug 1
-        run: |
-          cd cms
-          docker compose logs web
-          curl http://localhost:8000/api/v2/pages/find/?html_path=explore-the-collection&format=json
-          sleep 2
-          docker compose logs web
-          curl http://localhost:8000/api/v2/pages/5/
-          sleep 2
-          docker compose logs web
-      # - name: Check frontend with CMS - debug 2
+      # - name: Check frontend with CMS - debug 1
       #   run: |
       #     cd cms
-      #     curl --silent http://localhost:65535/explore-the-collection/
+      #     docker compose logs web
+      #     curl http://localhost:8000/api/v2/pages/find/?html_path=explore-the-collection&format=json
       #     sleep 2
       #     docker compose logs web
+      #     curl http://localhost:8000/api/v2/pages/5/
+      #     sleep 2
+      #     docker compose logs web
+      - name: Check frontend with CMS - debug 2
+        run: |
+          cd cms
+          curl http://localhost:65535/explore-the-collection/
+          sleep 2
+          docker compose logs web
       - name: Check frontend logs
         run: |
           cd frontend
-          docker compose exec app curl http://localhost:8000 || echo "Nope"
-          docker compose exec app curl http://host.docker.internal:8000 || echo "Nope"
-          docker compose exec app curl http://172.17.0.1:8000 || echo "Nope"
+          # docker compose exec app curl http://localhost:8000 || echo "Nope"
+          # docker compose exec app curl http://host.docker.internal:8000 || echo "Nope"
+          # docker compose exec app curl http://172.17.0.1:8000 || echo "Nope"
           docker compose logs app
       - name: Check frontend with CMS
         run: |
