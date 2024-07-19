@@ -25,4 +25,5 @@ docker compose run --rm certbot renew
 ```sh
 npx playwright test
 npx playwright test --ui
+npx playwright test --update-snapshots
 ```
