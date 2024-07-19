@@ -139,12 +139,17 @@ jobs:
         run: |
           cd cms
           docker compose logs web
+          curl --silent http://localhost:8000/api/v2/pages/find/?html_path=explore-the-collection&format=json
+          sleep 2
+          docker compose logs web
+          sleep 2
           curl --silent http://localhost:65535/explore-the-collection/
           docker compose logs web
       - name: Check frontend logs
         run: |
           cd frontend
           docker compose logs app
+          docker compose exec app curl --silent http://localhost:8000
       - name: Check frontend with CMS
         run: |
           cd cms
