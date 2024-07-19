@@ -42,19 +42,19 @@ jobs:
         run: |
           cd frontend
           FRONTEND_VERSION=$(yq '.services.frontend.image' < ../docker-compose.yml) yq -i '.services.app.image = strenv(FRONTEND_VERSION) | del(.services.app.build) | del(.services.app.volumes) | (.services.app.environment[] | select(. == "ENVIRONMENT=*")) = "ENVIRONMENT=staging" | (.services.app.environment[] | select(. == "CONFIG=*")) = "CONFIG=config.Staging" | .services.app.environment += "FORCE_HTTPS=False"' docker-compose.yml
-          sed -i -e 's/host.docker.internal/localhost/g' docker-compose.yml
+          sed -i -e 's/host.docker.internal/172.17.0.1/g' docker-compose.yml
           cat docker-compose.yml
       - name: Update cms docker-compose.yml
         run: |
           cd cms
           CMS_VERSION=$(yq '.services.cms.image' < ../docker-compose.yml) yq -i '.services.web.image = strenv(CMS_VERSION) | del(.services.web.build) | del(.services.web.volumes) | .services.web.volumes = ["media:/media"] | del(.services.web.command) | (.services.web.environment[] | select(. == "ENVIRONMENT=*")) = "ENVIRONMENT=staging" | .services.web.environment += "SECRET_KEY=abc123"' docker-compose.yml
-          sed -i -e 's/host.docker.internal/localhost/g' docker-compose.yml
+          sed -i -e 's/host.docker.internal/172.17.0.1/g' docker-compose.yml
           cat docker-compose.yml
       - name: Update search docker-compose.yml
         run: |
           cd search
           SEARCH_VERSION=$(yq '.services.search.image' < ../docker-compose.yml) yq -i '.services.app.image = strenv(SEARCH_VERSION) | del(.services.app.build) | del(.services.app.volumes) | (.services.app.environment[] | select(. == "ENVIRONMENT=*")) = "ENVIRONMENT=staging" | (.services.app.environment[] | select(. == "CONFIG=*")) = "CONFIG=config.Staging" | .services.app.environment += "SECRET_KEY=abc123"' docker-compose.yml
-          sed -i -e 's/host.docker.internal/localhost/g' docker-compose.yml
+          sed -i -e 's/host.docker.internal/172.17.0.1/g' docker-compose.yml
           cat docker-compose.yml
       - name: Install Platform.sh CLI
         run: |
