@@ -157,7 +157,9 @@ jobs:
       - name: Check frontend logs
         run: |
           cd frontend
-          docker compose exec app curl http://localhost:8000
+          docker compose exec app curl http://localhost:8000 || echo "Nope"
+          docker compose exec app curl http://host.docker.internal:8000 || echo "Nope"
+          docker compose exec app curl http://172.17.0.1:8000 || echo "Nope"
           docker compose logs app
       - name: Check frontend with CMS
         run: |
