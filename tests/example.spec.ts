@@ -7,7 +7,7 @@ test('has title', async ({ page }) => {
 });
 
 test('explore the collection link', async ({ page }) => {
-  await page.goto('http://localhost:65535/explore-the-collection');
+  await page.goto('http://localhost:65535/explore-the-collection/');
 
-  await expect(page.getByText('What might you find in The National Archives? Browse picture galleries, stories and in-depth articles from our experts about some of our most famous records and hidden gems.')).toBeVisible();
+  await expect(page.getByText('What might you find in The National Archives? Browse some of our most important and unusual records right here.')).toBeVisible();
 });
