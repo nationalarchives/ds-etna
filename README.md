@@ -26,4 +26,5 @@ docker compose run --rm certbot renew
 npx playwright test
 npx playwright test --ui
 npx playwright test --update-snapshots
+TEST_DOMAIN=https://develop.tna.dblclk.dev npx playwright test
 ```
