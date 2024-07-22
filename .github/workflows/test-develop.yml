@@ -21,7 +21,7 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: TEST_DOMAIN=https://develop.tna.dblclk.dev npx playwright test
+        run: TEST_DOMAIN=https://develop.tna.dblclk.dev CI=true npx playwright test
       - uses: actions/upload-artifact@v4
         if: always()
         with:
