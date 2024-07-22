@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test('perform a search', async ({ page }) => {
     const searchTerm = "ufo"
-    await page.goto('http://localhost:65535/search/');
+    await page.goto('/search/');
     // await expect(page).toHaveScreenshot();
     await expect(page.locator('#search-new')).toBeVisible();
     await expect(page.locator('#search-new')).toBeEditable();

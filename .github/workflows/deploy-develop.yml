@@ -6,7 +6,7 @@ on:
       - proof-of-concept
 
 concurrency:
-  group: test-${{ github.ref }}
+  group: test-local-${{ github.ref }}
 
 jobs:
   test:

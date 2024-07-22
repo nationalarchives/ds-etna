@@ -7,6 +7,6 @@ test.beforeEach(async ({ context }) => {
 });
 
 test('loads page without css', async ({ page }) => {
-    await page.goto('http://localhost:65535');
+    await page.goto('/');
     // await page.screenshot({ path: 'no-css.png', fullPage: true });
 });
