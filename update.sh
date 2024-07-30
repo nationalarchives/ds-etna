@@ -46,4 +46,5 @@ docker compose pull
 zero_downtime_deploy search
 zero_downtime_deploy frontend
 zero_downtime_deploy frontend-develop
-docker system prune --force --all --volumes
+# Prune Docker if disk usage is above 80%
+df -hp -k /dev/sda1 | awk '$5+0>=80{docker system prune --force --all --volumes;exit 1}'
