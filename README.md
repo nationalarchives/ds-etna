@@ -1,6 +1,15 @@
 # ETNA
 
-https://tna.dblclk.dev
+- https://tna.dblclk.dev
+- https://develop.tna.dblclk.dev
+
+## Applications
+
+| Resource   | Status                                                                                                                                                   |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Frontend   | ![Build status](https://img.shields.io/github/actions/workflow/status/nationalarchives/ds-etna-frontend/cd.yml?style=flat-square&event=push&branch=main) |
+| CMS        | ![Build status](https://img.shields.io/github/actions/workflow/status/nationalarchives/ds-wagtail/cd.yml?style=flat-square&event=push&branch=develop)    |
+| Search API | ![Build status](https://img.shields.io/github/actions/workflow/status/nationalarchives/ds-etna-search/cd.yml?style=flat-square&event=push&branch=main)   |
 
 ## Docker compose
 
