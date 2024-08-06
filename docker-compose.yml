@@ -128,7 +128,7 @@ services:
     expose:
       - 8080
   search:
-    image: ghcr.io/nationalarchives/national-archives-search-api:24.07.18.91
+    image: ghcr.io/nationalarchives/national-archives-search-api:24.08.06.92
     env_file:
       - .env
     environment:
