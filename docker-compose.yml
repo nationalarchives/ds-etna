@@ -148,8 +148,8 @@ services:
     env_file:
       - .env
     environment:
-      - ENVIRONMENT=develop
-      - CONFIG=config.Develop
+      - ENVIRONMENT=staging
+      - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
       - ALLOWED_HOSTS=*
       - ROSETTA_API_URL=http://afa13a7c0067b4f01991b0bad9e003a4-edf0e30af2b95f5f.elb.eu-west-2.amazonaws.com/api/v1
