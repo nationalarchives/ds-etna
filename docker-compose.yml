@@ -22,7 +22,7 @@ services:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
   frontend:
-    image: ghcr.io/nationalarchives/national-archives-website-frontend:24.08.12.537
+    image: ghcr.io/nationalarchives/ds-frontend:24.08.12.537
     env_file:
       - .env
     environment:
@@ -55,7 +55,7 @@ services:
     expose:
       - 8080
   frontend-develop:
-    image: ghcr.io/nationalarchives/national-archives-website-frontend:24.08.12.537
+    image: ghcr.io/nationalarchives/ds-frontend:24.08.12.537
     env_file:
       - .env
     environment:
@@ -100,7 +100,7 @@ services:
     expose:
       - 5432
   cms:
-    image: ghcr.io/nationalarchives/national-archives-website:24.08.06.475
+    image: ghcr.io/nationalarchives/ds-wagtail:24.08.06.475
     env_file:
       - .env
     environment:
@@ -128,7 +128,7 @@ services:
     expose:
       - 8080
   search:
-    image: ghcr.io/nationalarchives/national-archives-search-api:24.08.06.92
+    image: ghcr.io/nationalarchives/ds-search-api:24.08.06.92
     env_file:
       - .env
     environment:
