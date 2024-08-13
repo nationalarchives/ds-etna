@@ -109,6 +109,10 @@ jobs:
         run: |
           cd cms
           docker compose up web -d
+      - name: Start search API
+        run: |
+          cd search_api
+          docker compose up app -d
       - name: Start search
         run: |
           cd search
