@@ -6,6 +6,8 @@ services:
     depends_on:
       - frontend
       - frontend-develop
+      - search
+      - search_api
     ports:
       - 80:80
       - 443:443
