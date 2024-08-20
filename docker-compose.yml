@@ -130,7 +130,7 @@ services:
     expose:
       - 8080
   search_api:
-    image: ghcr.io/nationalarchives/ds-search-api:24.08.12.94
+    image: ghcr.io/nationalarchives/ds-search-api:24.08.20.95
     env_file:
       - .env
     environment:
