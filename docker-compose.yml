@@ -146,7 +146,7 @@ services:
     expose:
       - 8080
   search:
-    image: ghcr.io/nationalarchives/ds-search:24.08.20.18
+    image: ghcr.io/nationalarchives/ds-search:24.08.21.19
     env_file:
       - .env
     environment:
