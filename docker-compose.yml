@@ -36,7 +36,7 @@ services:
       # - WAGTAIL_API_URL=http://cms:8080/api/v2
       - WAGTAIL_API_URL=https://beta.nationalarchives.gov.uk/api/v2
       # - SEARCH_API_URL=http://search_api:8080/api/v1
-      - DOMAIN=tna.dblclk.dev
+      # - DOMAIN=tna.dblclk.dev
       - COOKIE_DOMAIN=.dblclk.dev
       - CSP_IMG_SRC='self',https://tna.dblclk.dev,https://beta.nationalarchives.gov.uk,https://i.ytimg.com,https://picsum.photos,https://fastly.picsum.photos
       - CSP_SCRIPT_SRC='self'
@@ -68,7 +68,7 @@ services:
       - SENTRY_JS=https://js.sentry-cdn.com/f736865f0e1fb140b8192082e1bfb5ad.min.js
       - WAGTAIL_API_URL=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site/api/v2
       # - SEARCH_API_URL=http://search_api:8080/api/v1
-      - DOMAIN=develop.tna.dblclk.dev
+      # - DOMAIN=develop.tna.dblclk.dev
       - COOKIE_DOMAIN=.dblclk.dev
       - CSP_IMG_SRC='self',https://develop.tna.dblclk.dev,https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site,https://*.nationalarchives.gov.uk,https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site,https://i.ytimg.com,https://picsum.photos,https://fastly.picsum.photos
       - CSP_SCRIPT_SRC='self'
