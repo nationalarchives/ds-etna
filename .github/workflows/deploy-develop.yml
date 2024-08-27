@@ -1,9 +1,10 @@
 name: Test local
 
 on:
-  push:
-    branches:
-      - proof-of-concept
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - proof-of-concept
 
 concurrency:
   group: test-local-${{ github.ref }}
