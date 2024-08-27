@@ -153,6 +153,7 @@ services:
       - ENVIRONMENT=staging
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
+      - COOKIE_DOMAIN=.dblclk.dev
       - ALLOWED_HOSTS=search.tna.dblclk.dev,tna.dblclk.dev,*
       - ROSETTA_API_URL=http://afa13a7c0067b4f01991b0bad9e003a4-edf0e30af2b95f5f.elb.eu-west-2.amazonaws.com/api/v1
       - CSP_IMG_SRC='self',https://tna.dblclk.dev,https://search.tna.dblclk.dev
