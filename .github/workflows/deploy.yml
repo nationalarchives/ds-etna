@@ -19,7 +19,10 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         port: ${{ secrets.SSH_PORT }}
-        script: cd /root/ds-etna && git pull && docker compose up -d
+        script: |
+          cd /root/ds-etna
+          git pull
+          docker compose up -d
 
   test:
     runs-on: ubuntu-latest
