@@ -43,7 +43,7 @@ git pull
 docker compose up -d
 docker compose pull
 # zero_downtime_deploy cms
-zero_downtime_deploy search_api
+# zero_downtime_deploy search_api
 zero_downtime_deploy search
 zero_downtime_deploy frontend
 zero_downtime_deploy frontend-develop
