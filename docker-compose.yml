@@ -82,7 +82,7 @@ services:
       - CSP_FEATURE_PICTURE_IN_PICTURE='self',https://www.youtube-nocookie.com
       - FRAME_DOMAIN_ALLOW=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
       - CACHE_DEFAULT_TIMEOUT=10
-      - CACHE_HEADER_DURATION=86400
+      - CACHE_HEADER_DURATION=31536000
       - GA4_ID=GTM-KX8ZWVZG
     # depends_on:
     #   - cms
