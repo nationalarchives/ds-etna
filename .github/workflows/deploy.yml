@@ -23,6 +23,7 @@ jobs:
           cd /root/ds-etna
           git pull
           docker compose up -d
+          docker compose exec nginx /usr/sbin/nginx -s reload
 
   test:
     runs-on: ubuntu-latest
