@@ -145,14 +145,18 @@ services:
       - .env
     environment:
       - ENVIRONMENT=staging
-      - CONFIG=config.Staging
-      - SECRET_KEY=${SECRET_KEY}
-      - COOKIE_DOMAIN=.dblclk.dev
+      - DJANGO_SETTINGS_MODULE=config.settings.staging
       - ALLOWED_HOSTS=develop.tna.dblclk.dev,tna.dblclk.dev,*
-      - ROSETTA_API_URL=http://afa13a7c0067b4f01991b0bad9e003a4-edf0e30af2b95f5f.elb.eu-west-2.amazonaws.com/api/v1
-      - CSP_IMG_SRC='self'
+      - SECRET_KEY=${SECRET_KEY}
+      - DATABASE_NAME=postgres
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - COOKIE_DOMAIN=.dblclk.dev
       - CSP_STYLE_SRC_ELEM='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
       - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
+      - ROSETTA_API_URL=http://afa13a7c0067b4f01991b0bad9e003a4-edf0e30af2b95f5f.elb.eu-west-2.amazonaws.com/api/v1
     expose:
       - 8080
   # platform:
