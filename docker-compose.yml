@@ -185,6 +185,8 @@ services:
       - 6379:6379
   search_api:
     image: ghcr.io/nationalarchives/ds-search-api:24.09.16.98
+  cms:
+    image: ghcr.io/nationalarchives/ds-wagtail:24.09.17.499
 volumes:
   pgdata:
   media:
