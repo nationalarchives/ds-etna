@@ -96,7 +96,7 @@ services:
     expose:
       - 5432
   cms:
-    image: ghcr.io/nationalarchives/ds-wagtail:feature-global-header-and-footer
+    image: ghcr.io/nationalarchives/ds-wagtail:24.09.17.500
     env_file:
       - .env
     environment:
@@ -185,8 +185,6 @@ services:
       - 6379:6379
   search_api:
     image: ghcr.io/nationalarchives/ds-search-api:24.09.16.98
-  cms:
-    image: ghcr.io/nationalarchives/ds-wagtail:24.09.17.500
 volumes:
   pgdata:
   media:
