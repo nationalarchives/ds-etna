@@ -101,6 +101,7 @@ services:
       - .env
     environment:
       - ENVIRONMENT=staging
+      - DEBUG=True
       - DJANGO_SETTINGS_MODULE=config.settings.production
       - ALLOWED_HOSTS=develop.tna.dblclk.dev,tna.dblclk.dev,*
       - WAGTAILADMIN_BASE_URL=https://tna.dblclk.dev
