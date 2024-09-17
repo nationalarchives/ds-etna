@@ -47,7 +47,6 @@ services:
       - FRAME_DOMAIN_ALLOW=https://beta.nationalarchives.gov.uk
       - CACHE_DEFAULT_TIMEOUT=10
       - GA4_ID=GTM-KX8ZWVZG
-      - FEATURE_PHASE_BANNER=False
     # depends_on:
     #   - cms
     #   - search_api
@@ -78,7 +77,6 @@ services:
       - CACHE_DEFAULT_TIMEOUT=10
       - CACHE_HEADER_DURATION=31536000
       - GA4_ID=GTM-KX8ZWVZG
-      - FEATURE_PHASE_BANNER=False
     # depends_on:
     #   - cms
     #   - search_api
