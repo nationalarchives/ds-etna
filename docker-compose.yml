@@ -186,7 +186,7 @@ services:
   search_api:
     image: ghcr.io/nationalarchives/ds-search-api:24.09.16.98
   cms:
-    image: ghcr.io/nationalarchives/ds-wagtail:24.09.17.499
+    image: ghcr.io/nationalarchives/ds-wagtail:24.09.17.500
 volumes:
   pgdata:
   media:
