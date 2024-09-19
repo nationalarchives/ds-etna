@@ -53,7 +53,7 @@ services:
     expose:
       - 8080
   frontend-develop:
-    image: ghcr.io/nationalarchives/ds-frontend:24.09.18.667
+    image: ghcr.io/nationalarchives/ds-frontend:feature-events
     env_file:
       - .env
     environment:
@@ -101,7 +101,6 @@ services:
       - .env
     environment:
       - ENVIRONMENT=staging
-      - DEBUG=True
       - DJANGO_SETTINGS_MODULE=config.settings.production
       - ALLOWED_HOSTS=develop.tna.dblclk.dev,tna.dblclk.dev,*
       - WAGTAILADMIN_BASE_URL=https://tna.dblclk.dev
