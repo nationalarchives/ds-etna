@@ -53,7 +53,7 @@ services:
     expose:
       - 8080
   frontend-develop:
-    image: ghcr.io/nationalarchives/ds-frontend:24.10.09.684
+    image: ghcr.io/nationalarchives/ds-frontend:feature-videojs
     env_file:
       - .env
     environment:
