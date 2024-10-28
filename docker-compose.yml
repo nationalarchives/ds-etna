@@ -197,8 +197,6 @@ services:
     command: /bin/sh -c "redis-server --requirepass redis"
     ports:
       - 6379:6379
-  search_api:
-    image: ghcr.io/nationalarchives/ds-search-api:24.09.16.98
 volumes:
   pgdata:
   media:
