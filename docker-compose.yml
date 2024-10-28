@@ -84,7 +84,7 @@ services:
     expose:
       - 8080
   frontend-enrichment:
-    image: ghcr.io/nationalarchives/ds-frontend-enrichment:24.10.28.762
+    image: ghcr.io/nationalarchives/ds-frontend-enrichment:24.10.28.3
     env_file:
       - .env
     environment:
