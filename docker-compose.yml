@@ -77,7 +77,7 @@ services:
       - CACHE_DEFAULT_TIMEOUT=10
       - CACHE_HEADER_DURATION=31536000
       - GA4_ID=GTM-KX8ZWVZG
-      - FEATURE_LOGO_ADORNMENTS=True
+      - FEATURE_LOGO_ADORNMENTS_CSS=https://develop.tna.dblclk.dev//enrichment/css/logo-adornments.css
     # depends_on:
     #   - cms
     #   - search_api
