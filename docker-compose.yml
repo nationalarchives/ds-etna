@@ -83,6 +83,19 @@ services:
     #   - search_api
     expose:
       - 8080
+  frontend-enrichment:
+    image: ghcr.io/nationalarchives/ds-frontend-enrichment:24.10.28.762
+    env_file:
+      - .env
+    environment:
+      - ENVIRONMENT=staging
+      - CONFIG=config.Staging
+      - SECRET_KEY=${SECRET_KEY}
+      - COOKIE_DOMAIN=.dblclk.dev
+      - CACHE_DEFAULT_TIMEOUT=3600
+      - CACHE_HEADER_DURATION=31536000
+    expose:
+      - 8080
   postgres:
     container_name: postgres
     image: postgres:13
