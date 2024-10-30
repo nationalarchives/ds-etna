@@ -24,7 +24,7 @@ services:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
   frontend:
-    image: ghcr.io/nationalarchives/ds-frontend:24.10.30.774
+    image: ghcr.io/nationalarchives/ds-frontend:24.10.30.776
     env_file:
       - .env
     environment:
@@ -53,7 +53,7 @@ services:
     expose:
       - 8080
   frontend-develop:
-    image: ghcr.io/nationalarchives/ds-frontend:24.10.30.774
+    image: ghcr.io/nationalarchives/ds-frontend:24.10.30.776
     env_file:
       - .env
     environment:
