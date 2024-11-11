@@ -25,7 +25,7 @@ services:
       - ./certbot/conf/:/etc/letsencrypt/:rw
   frontend:
     # image: ghcr.io/nationalarchives/ds-frontend:feature-container-https
-    image: ghcr.io/nationalarchives/ds-frontend:24.11.07.794
+    image: ghcr.io/nationalarchives/ds-frontend:24.11.11.798
     env_file:
       - .env
     environment:
@@ -59,7 +59,7 @@ services:
       - ./certbot/conf/live/tna.dblclk.dev/fullchain.pem:/home/app/ssl/cert.pem:ro
       - ./certbot/conf/live/tna.dblclk.dev/privkey.pem:/home/app/ssl/key.pem:ro
   frontend-develop:
-    image: ghcr.io/nationalarchives/ds-frontend:24.11.07.794
+    image: ghcr.io/nationalarchives/ds-frontend:24.11.11.798
     env_file:
       - .env
     environment:
