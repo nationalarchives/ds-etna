@@ -55,8 +55,6 @@ services:
     #   - search_api
     expose:
       - 8080
-    ports:
-      - 8888:8080
     volumes:
       - ./certbot/conf/live/tna.dblclk.dev/fullchain.pem:/home/app/ssl/cert.pem
       - ./certbot/conf/live/tna.dblclk.dev/privkey.pem:/home/app/ssl/key.pem
