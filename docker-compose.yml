@@ -24,8 +24,7 @@ services:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
   frontend:
-    image: ghcr.io/nationalarchives/ds-frontend:feature-container-https
-    # image: ghcr.io/nationalarchives/ds-frontend:24.11.11.798
+    image: ghcr.io/nationalarchives/ds-frontend:24.11.11.798
     env_file:
       - .env
     environment:
@@ -83,6 +82,7 @@ services:
       - CACHE_HEADER_DURATION=31536000
       - GA4_ID=GTM-KX8ZWVZG
       - FEATURE_LOGO_ADORNMENTS_CSS=https://develop.tna.dblclk.dev/enrichment/css/logo-adornments.css
+      - ALLOW_INSECURE=true
     # depends_on:
     #   - cms
     #   - search_api
@@ -99,6 +99,7 @@ services:
       - COOKIE_DOMAIN=.dblclk.dev
       - CACHE_DEFAULT_TIMEOUT=3600
       - CACHE_HEADER_DURATION=31536000
+      - ALLOW_INSECURE=true
     expose:
       - 8080
   postgres:
@@ -177,6 +178,7 @@ services:
       - CSP_STYLE_SRC_ELEM='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
       - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
       - ROSETTA_API_URL=http://afa13a7c0067b4f01991b0bad9e003a4-edf0e30af2b95f5f.elb.eu-west-2.amazonaws.com/api/v1
+      - ALLOW_INSECURE=true
     expose:
       - 8080
   # platform:
