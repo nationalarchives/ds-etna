@@ -48,16 +48,15 @@ services:
       - FRAME_DOMAIN_ALLOW=https://beta.nationalarchives.gov.uk
       - CACHE_DEFAULT_TIMEOUT=10
       - GA4_ID=GTM-KX8ZWVZG
-      # - SSL_CERTIFICATE_FILE=/home/app/ssl/fullchain.pem
-      # - SSL_KEY_FILE=/home/app/ssl/privkey.pem
+      - ALLOW_INSECURE=true
     # depends_on:
     #   - cms
     #   - search_api
     expose:
       - 8080
-    volumes:
-      - ./certbot/conf/live/tna.dblclk.dev/fullchain.pem:/home/app/ssl/cert.pem
-      - ./certbot/conf/live/tna.dblclk.dev/privkey.pem:/home/app/ssl/key.pem
+    # volumes:
+    #   - ./certbot/conf/live/tna.dblclk.dev/fullchain.pem:/home/app/ssl/cert.pem
+    #   - ./certbot/conf/live/tna.dblclk.dev/privkey.pem:/home/app/ssl/key.pem
   frontend-develop:
     image: ghcr.io/nationalarchives/ds-frontend:24.11.11.798
     env_file:
