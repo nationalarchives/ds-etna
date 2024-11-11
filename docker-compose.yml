@@ -56,7 +56,8 @@ services:
     expose:
       - 8080
     volumes:
-      - ./certbot/conf/:/home/app/ssl/:ro
+      - ./certbot/conf/live/tna.dblclk.dev/fullchain.pem:/home/app/ssl/cert.pem:ro
+      - ./certbot/conf/live/tna.dblclk.dev/privkey.pem:/home/app/ssl/key.pem:ro
   frontend-develop:
     image: ghcr.io/nationalarchives/ds-frontend:24.11.07.794
     env_file:
