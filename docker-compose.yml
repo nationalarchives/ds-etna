@@ -47,11 +47,15 @@ services:
       - FRAME_DOMAIN_ALLOW=https://beta.nationalarchives.gov.uk
       - CACHE_DEFAULT_TIMEOUT=10
       - GA4_ID=GTM-KX8ZWVZG
+      - SSL_CERTIFICATE_FILE=/etc/nginx/ssl/live/tna.dblclk.dev/fullchain.pem
+      - SSL_KEY_FILE=/etc/nginx/ssl/live/tna.dblclk.dev/privkey.pem
     # depends_on:
     #   - cms
     #   - search_api
     expose:
       - 8080
+    volumes:
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
   frontend-develop:
     image: ghcr.io/nationalarchives/ds-frontend:24.11.07.794
     env_file:
