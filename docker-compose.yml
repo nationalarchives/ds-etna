@@ -58,8 +58,8 @@ services:
     ports:
       - 8888:8080
     volumes:
-      - ./certbot/conf/live/tna.dblclk.dev/fullchain.pem:/home/app/ssl/cert.pem:ro
-      - ./certbot/conf/live/tna.dblclk.dev/privkey.pem:/home/app/ssl/key.pem:ro
+      - ./certbot/conf/live/tna.dblclk.dev/fullchain.pem:/home/app/ssl/cert.pem
+      - ./certbot/conf/live/tna.dblclk.dev/privkey.pem:/home/app/ssl/key.pem
   frontend-develop:
     image: ghcr.io/nationalarchives/ds-frontend:24.11.11.798
     env_file:
