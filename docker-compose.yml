@@ -116,7 +116,7 @@ services:
     expose:
       - 5432
   cms:
-    image: ghcr.io/nationalarchives/ds-wagtail:24.11.13.511
+    image: ghcr.io/nationalarchives/ds-wagtail:24.11.15.513
     env_file:
       - .env
     environment:
