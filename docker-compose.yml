@@ -114,7 +114,7 @@ services:
       - CSP_STYLE_SRC='self',fonts.googleapis.com,p.typekit.net,use.typekit.net
       - CSP_FONT_SRC='self',fonts.gstatic.com,use.typekit.net
       - DB_HOST=postgres
-      - DB_NAME=sitemap_urls
+      - DB_NAME=etna
       - DB_USERNAME=etna
       - DB_PASSWORD=${POSTGRES_PASSWORD}
       - SITEMAPS=https://www.nationalarchives.gov.uk/sitemap.xml,https://develop.tna.dblclk.dev/sitemap.xml,https://nationalarchives.github.io/design-system/sitemap.xml
