@@ -117,6 +117,7 @@ services:
       - DB_NAME=etna
       - DB_USERNAME=etna
       - DB_PASSWORD=${POSTGRES_PASSWORD}
+      - CACHE_DEFAULT_TIMEOUT=3600
       - SITEMAPS=https://www.nationalarchives.gov.uk/sitemap.xml,https://blog.nationalarchives.gov.uk/sitemap_index.xml,https://develop.tna.dblclk.dev/sitemap.xml,https://nationalarchives.github.io/design-system/sitemap.xml
       - POPULATE_ON_STARTUP=False
       - ALLOW_INSECURE=true
