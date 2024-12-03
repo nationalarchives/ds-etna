@@ -1,14 +1,25 @@
 {
-  "frontend": {
-    "repo": "https://github.com/nationalarchives/ds-etna-frontend"
-  },
-  "cms": {
-    "repo": "https://github.com/nationalarchives/ds-wagtail"
-  },
-  "search": {
-    "repo": "https://github.com/nationalarchives/ds-etna-search"
-  },
-  "postgres": {
-    "enabled": true
+  "name": "tna-web",
+  "services": {
+    "frontend": {
+      "repo": "https://github.com/nationalarchives/ds-frontend",
+      "services": ["app"]
+    },
+    "cms": {
+      "repo": "https://github.com/nationalarchives/ds-wagtail",
+      "services": ["app"]
+    },
+    "search": {
+      "repo": "https://github.com/nationalarchives/ds-search",
+      "services": ["app"]
+    },
+    "frontend-enrichment": {
+      "repo": "https://github.com/nationalarchives/ds-frontend-enrichment",
+      "services": ["app"]
+    },
+    "postgres": {
+      "enabled": true,
+      "password": "psql123"
+    }
   }
 }
