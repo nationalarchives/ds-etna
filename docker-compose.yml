@@ -75,7 +75,7 @@ services:
       - CSP_CONNECT_SRC='self',https://*.google-analytics.com,https://*.sentry.io,https://noembed.com
       - CSP_MEDIA_SRC='self',https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
       - CSP_WORKER_SRC='self',blob:,https://develop.tna.dblclk.dev
-      - CSP_FRAME_SRC='self',https://www.youtube-nocookie.com,https://www.eventbrite.com
+      - CSP_FRAME_SRC='self',https://www.youtube-nocookie.com,https://www.eventbrite.com,https://www.openstreetmap.org
       - CSP_FEATURE_PICTURE_IN_PICTURE='self',https://www.youtube-nocookie.com
       - FRAME_DOMAIN_ALLOW=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
       - CACHE_DEFAULT_TIMEOUT=10
