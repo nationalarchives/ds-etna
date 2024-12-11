@@ -139,34 +139,34 @@ services:
       - pgdata:/var/lib/postgresql/data:rw
     expose:
       - 5432
-  cms:
-    image: ghcr.io/nationalarchives/ds-wagtail:24.11.20.518
-    env_file:
-      - .env
-    environment:
-      - ENVIRONMENT=staging
-      - DJANGO_SETTINGS_MODULE=config.settings.production
-      - ALLOWED_HOSTS=develop.tna.dblclk.dev,tna.dblclk.dev,*
-      - WAGTAILADMIN_BASE_URL=https://tna.dblclk.dev
-      - CSRF_TRUSTED_ORIGIN=https://tna.dblclk.dev
-      - DATABASE_HOST=postgres
-      - DATABASE_PORT=5432
-      - DATABASE_NAME=etna
-      - DATABASE_USER=etna
-      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
-      - DATABASE_ENGINE=django.db.backends.postgresql
-      - KONG_CLIENT_BASE_URL=https://aa83a1e6831944fa8bcf17f5ce391b73-58be9fd587cba13e.elb.eu-west-2.amazonaws.com/api/v1/data
-      - KONG_IMAGE_PREVIEW_BASE_URL=https://ciim-media.s3.eu-west-2.amazonaws.com/preview/
-      - KONG_CLIENT_KEY=${KONG_CLIENT_KEY}
-      - KONG_CLIENT_VERIFY_CERTIFICATES=false
-      - REDIS_URL=redis://:redis@redis:6379
-    depends_on:
-      - postgres
-      - redis
-    volumes:
-      - media:/app/media:rw
-    expose:
-      - 8080
+  # cms:
+  #   image: ghcr.io/nationalarchives/ds-wagtail:24.11.20.518
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - ENVIRONMENT=staging
+  #     - DJANGO_SETTINGS_MODULE=config.settings.production
+  #     - ALLOWED_HOSTS=develop.tna.dblclk.dev,tna.dblclk.dev,*
+  #     - WAGTAILADMIN_BASE_URL=https://tna.dblclk.dev
+  #     - CSRF_TRUSTED_ORIGIN=https://tna.dblclk.dev
+  #     - DATABASE_HOST=postgres
+  #     - DATABASE_PORT=5432
+  #     - DATABASE_NAME=etna
+  #     - DATABASE_USER=etna
+  #     - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+  #     - DATABASE_ENGINE=django.db.backends.postgresql
+  #     - KONG_CLIENT_BASE_URL=https://aa83a1e6831944fa8bcf17f5ce391b73-58be9fd587cba13e.elb.eu-west-2.amazonaws.com/api/v1/data
+  #     - KONG_IMAGE_PREVIEW_BASE_URL=https://ciim-media.s3.eu-west-2.amazonaws.com/preview/
+  #     - KONG_CLIENT_KEY=${KONG_CLIENT_KEY}
+  #     - KONG_CLIENT_VERIFY_CERTIFICATES=false
+  #     - REDIS_URL=redis://:redis@redis:6379
+  #   depends_on:
+  #     - postgres
+  #     - redis
+  #   volumes:
+  #     - media:/app/media:rw
+  #   expose:
+  #     - 8080
   # search_api:
   #   image: ghcr.io/nationalarchives/ds-search-api:24.08.20.96
   #   env_file:
