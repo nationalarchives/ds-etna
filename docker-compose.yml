@@ -229,6 +229,8 @@ services:
     command: /bin/sh -c "redis-server --requirepass redis"
     ports:
       - 6379:6379
+  cms:
+    image: ghcr.io/nationalarchives/ds-wagtail:24.12.12.520
 volumes:
   pgdata:
   media:
