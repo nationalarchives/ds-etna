@@ -82,6 +82,7 @@ services:
       - CACHE_HEADER_DURATION=31536000
       - GA4_ID=GTM-KX8ZWVZG
       - FEATURE_LOGO_ADORNMENTS_CSS=https://develop.tna.dblclk.dev/enrichment/css/logo-adornments.css
+      - FEATURE_LOGO_ADORNMENTS_JS=https://develop.tna.dblclk.dev/enrichment/js/logo-adornments.js
       - ALLOW_INSECURE=true
     # depends_on:
     #   - cms
