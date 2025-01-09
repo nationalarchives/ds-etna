@@ -24,7 +24,7 @@ services:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
   frontend:
-    image: ghcr.io/nationalarchives/ds-frontend:25.01.09.911
+    image: ghcr.io/nationalarchives/ds-frontend:25.01.09.912
     env_file:
       - .env
     environment:
@@ -57,7 +57,7 @@ services:
       #   - ./certbot/conf/live/tna.dblclk.dev/fullchain.pem:/home/app/ssl/cert.pem
       #   - ./certbot/conf/live/tna.dblclk.dev/privkey.pem:/home/app/ssl/key.pem
   frontend-develop:
-    image: ghcr.io/nationalarchives/ds-frontend:25.01.09.911
+    image: ghcr.io/nationalarchives/ds-frontend:25.01.09.912
     env_file:
       - .env
     environment:
