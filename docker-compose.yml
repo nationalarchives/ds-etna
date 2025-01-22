@@ -29,6 +29,7 @@ services:
       - .env
     environment:
       - ENVIRONMENT=staging
+      - ENVIRONMENT_NAME=develop
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
       - SENTRY_DSN=https://cd29dbbbe0df9acf5c001eb0da230525@o1230303.ingest.us.sentry.io/4507423798853632
@@ -62,6 +63,7 @@ services:
       - .env
     environment:
       - ENVIRONMENT=staging
+      - ENVIRONMENT_NAME=develop
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
       - SENTRY_DSN=https://cd29dbbbe0df9acf5c001eb0da230525@o1230303.ingest.us.sentry.io/4507423798853632
@@ -109,6 +111,7 @@ services:
       - .env
     environment:
       - ENVIRONMENT=staging
+      - ENVIRONMENT_NAME=develop
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
       - COOKIE_DOMAIN=.dblclk.dev
@@ -190,6 +193,8 @@ services:
       - .env
     environment:
       - ENVIRONMENT=staging
+      - ENVIRONMENT_NAME=develop
+      - SENTRY_DSN=https://3e24f4f474026e113e6dcdeccf2abded@o1230303.ingest.us.sentry.io/4507458864087040
       - DJANGO_SETTINGS_MODULE=config.settings.staging
       - ALLOWED_HOSTS=develop.tna.dblclk.dev,tna.dblclk.dev,*
       - SECRET_KEY=${SECRET_KEY}
