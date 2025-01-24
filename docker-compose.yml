@@ -29,7 +29,7 @@ services:
       - .env
     environment:
       - ENVIRONMENT=staging
-      - ENVIRONMENT_NAME=develop
+      - ENVIRONMENT_NAME=staging
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
       - SENTRY_DSN=https://cd29dbbbe0df9acf5c001eb0da230525@o1230303.ingest.us.sentry.io/4507423798853632
