@@ -48,4 +48,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run tests
-        run: gh workflow run manual.yml --repo nationalarchives/ds-tna-website-tests --raw-field domain=https://develop.tna.dblclk.dev --raw-field notify-slack=false
+        run: gh workflow run manual.yml --repo nationalarchives/ds-tna-website-tests --raw-field domain=https://develop.tna.dblclk.dev --raw-field notify-slack=true
