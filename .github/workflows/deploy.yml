@@ -44,8 +44,7 @@ jobs:
     needs:
       - deploy
     env:
-      GH_TOKEN: ${{ github.token }}
-    permissions: write-all
+      GH_TOKEN: ${{ secrets.ACTIONS_GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - name: Run tests
