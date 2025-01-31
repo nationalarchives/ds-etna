@@ -49,3 +49,5 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run tests
         run: gh workflow run manual.yml --repo nationalarchives/ds-tna-website-tests --raw-field domain=https://develop.tna.dblclk.dev --raw-field notify-slack=true
+      - name: Output link
+        run: echo "[ds-tna-website-tests](https://github.com/nationalarchives/ds-tna-website-tests/actions/workflows/manual.yml)" >> $GITHUB_STEP_SUMMARY
