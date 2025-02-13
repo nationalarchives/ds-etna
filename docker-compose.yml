@@ -28,7 +28,7 @@ services:
     env_file:
       - .env
     environment:
-      - ENVIRONMENT=staging
+      - ENVIRONMENT=production
       - ENVIRONMENT_NAME=staging
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
@@ -62,7 +62,7 @@ services:
     env_file:
       - .env
     environment:
-      - ENVIRONMENT=staging
+      - ENVIRONMENT=production
       - ENVIRONMENT_NAME=develop
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
@@ -96,7 +96,7 @@ services:
     env_file:
       - .env
     environment:
-      - ENVIRONMENT=staging
+      - ENVIRONMENT=production
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
       - COOKIE_DOMAIN=.dblclk.dev
@@ -110,7 +110,7 @@ services:
     env_file:
       - .env
     environment:
-      - ENVIRONMENT=staging
+      - ENVIRONMENT=production
       - ENVIRONMENT_NAME=develop
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
@@ -149,7 +149,7 @@ services:
   #   env_file:
   #     - .env
   #   environment:
-  #     - ENVIRONMENT=staging
+  #     - ENVIRONMENT=production
   #     - DJANGO_SETTINGS_MODULE=config.settings.production
   #     - ALLOWED_HOSTS=develop.tna.dblclk.dev,tna.dblclk.dev,*
   #     - WAGTAILADMIN_BASE_URL=https://tna.dblclk.dev
@@ -177,7 +177,7 @@ services:
   #   env_file:
   #     - .env
   #   environment:
-  #     - ENVIRONMENT=staging
+  #     - ENVIRONMENT=production
   #     - CONFIG=config.Staging
   #     - SECRET_KEY=${SECRET_KEY}
   #     - SENTRY_DSN=https://3e24f4f474026e113e6dcdeccf2abded@o1230303.ingest.us.sentry.io/4507458864087040
@@ -193,7 +193,7 @@ services:
     env_file:
       - .env
     environment:
-      - ENVIRONMENT=staging
+      - ENVIRONMENT=production
       - ENVIRONMENT_NAME=develop
       - SENTRY_DSN=https://3e24f4f474026e113e6dcdeccf2abded@o1230303.ingest.us.sentry.io/4507458864087040
       - DJANGO_SETTINGS_MODULE=config.settings.staging
