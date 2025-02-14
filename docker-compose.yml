@@ -210,7 +210,6 @@ services:
       - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
       - ROSETTA_API_URL=https://rosetta-staging.k-int.com/rosetta/data
       - ALLOW_INSECURE=true
-      - ROSETTA_CLIENT_BASE_URL=${ROSETTA_CLIENT_BASE_URL}
     expose:
       - 8080
   # platform:
