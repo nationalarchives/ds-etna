@@ -48,6 +48,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run tests
-        run: gh workflow run manual.yml --repo nationalarchives/ds-tna-website-tests --raw-field domain=https://develop.tna.dblclk.dev --raw-field notify-slack=true --raw-field description="$(git log -1 --pretty=%B | sed '/./,$!d' | sed '/^$/d' | sed 's/^/> /')"
+        run: gh workflow run manual.yml --repo nationalarchives/ds-tna-website-tests --raw-field domain=https://develop.tna.dblclk.dev --raw-field notify-slack-on-pass=false --raw-field notify-slack-on-fail=true --raw-field description="$(git log -1 --pretty=%B | sed '/./,$!d' | sed '/^$/d' | sed 's/^/> /')"
       - name: Output link
         run: echo "[Test run](https://github.com/nationalarchives/ds-tna-website-tests/actions/workflows/manual.yml)" >> $GITHUB_STEP_SUMMARY
