@@ -208,7 +208,7 @@ services:
       - COOKIE_DOMAIN=.dblclk.dev
       - CSP_STYLE_SRC_ELEM='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
       - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
-      - ROSETTA_API_URL=https://rosetta-staging.k-int.com/rosetta/data
+      - ROSETTA_API_URL=http://rosetta-staging.k-int.com/rosetta/data
       - ALLOW_INSECURE=true
     expose:
       - 8080
