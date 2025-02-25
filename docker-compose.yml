@@ -189,7 +189,7 @@ services:
   #   expose:
   #     - 8080
   search:
-    image: ghcr.io/nationalarchives/ds-search:25.02.25.326
+    image: ghcr.io/nationalarchives/ds-search:25.02.25.327
     env_file:
       - .env
     environment:
