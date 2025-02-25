@@ -106,7 +106,7 @@ services:
     expose:
       - 8080
   sitemap_search:
-    image: ghcr.io/nationalarchives/ds-sitemap-search:25.02.06.28
+    image: ghcr.io/nationalarchives/ds-sitemap-search:25.02.25.30
     env_file:
       - .env
     environment:
