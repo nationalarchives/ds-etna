@@ -91,6 +91,40 @@ services:
     #   - search_api
     expose:
       - 8080
+  frontend-events:
+    image: ghcr.io/nationalarchives/ds-frontend:feature-events
+    env_file:
+      - .env
+    environment:
+      - ENVIRONMENT=production
+      - ENVIRONMENT_NAME=develop
+      - CONFIG=config.Staging
+      - SECRET_KEY=${SECRET_KEY}
+      - SENTRY_DSN=https://cd29dbbbe0df9acf5c001eb0da230525@o1230303.ingest.us.sentry.io/4507423798853632
+      - SENTRY_JS=https://js.sentry-cdn.com/f736865f0e1fb140b8192082e1bfb5ad.min.js
+      - WAGTAIL_API_URL=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site/api/v2
+      - COOKIE_DOMAIN=.dblclk.dev
+      - CSP_IMG_SRC='self',https://*.tna.dblclk.dev,https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site,https://*.nationalarchives.gov.uk,https://i.ytimg.com,https://img.youtube.com,https://www.googletagmanager.com,https://img.evbuc.com
+      - CSP_SCRIPT_SRC_ELEM='self',https://www.googletagmanager.com,https://*.sentry-cdn.com,https://www.youtube.com,https://www.eventbrite.com
+      - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
+      - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
+      - CSP_CONNECT_SRC='self',https://*.google-analytics.com,https://*.sentry.io,https://noembed.com
+      - CSP_MEDIA_SRC='self',https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
+      - CSP_WORKER_SRC='self',blob:,https://*.tna.dblclk.dev
+      - CSP_FRAME_SRC='self',https://www.youtube-nocookie.com,https://www.eventbrite.com,https://www.openstreetmap.org
+      - CSP_FEATURE_PICTURE_IN_PICTURE='self',https://www.youtube-nocookie.com
+      - FRAME_DOMAIN_ALLOW=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
+      - CACHE_DEFAULT_TIMEOUT=10
+      - CACHE_HEADER_DURATION=31536000
+      - GA4_ID=GTM-KX8ZWVZG
+      - FEATURE_LOGO_ADORNMENTS_CSS=https://develop.tna.dblclk.dev/enrichment/css/logo-adornments.css
+      - FEATURE_LOGO_ADORNMENTS_JS=https://develop.tna.dblclk.dev/enrichment/js/logo-adornments.js
+      - ALLOW_INSECURE=true
+    # depends_on:
+    #   - cms
+    #   - search_api
+    expose:
+      - 8080
   frontend-enrichment:
     image: ghcr.io/nationalarchives/ds-frontend-enrichment:25.02.18.16
     env_file:
