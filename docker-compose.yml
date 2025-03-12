@@ -6,8 +6,10 @@ services:
     depends_on:
       - frontend
       - frontend-develop
+      - frontend-events
+      - frontend-enrichment
+      - sitemap-search
       - search
-      # - search_api
     ports:
       - 80:80
       - 443:443
@@ -49,9 +51,6 @@ services:
       - CACHE_DEFAULT_TIMEOUT=10
       - GA4_ID=GTM-KX8ZWVZG
       - ALLOW_INSECURE=true
-    # depends_on:
-    #   - cms
-    #   - search_api
     expose:
       - 8080
       # volumes:
@@ -87,9 +86,6 @@ services:
       - FEATURE_LOGO_ADORNMENTS_CSS=https://develop.tna.dblclk.dev/enrichment/css/logo-adornments.css
       - FEATURE_LOGO_ADORNMENTS_JS=https://develop.tna.dblclk.dev/enrichment/js/logo-adornments.js
       - ALLOW_INSECURE=true
-    # depends_on:
-    #   - cms
-    #   - search_api
     expose:
       - 8080
   frontend-events:
@@ -121,9 +117,6 @@ services:
       - FEATURE_LOGO_ADORNMENTS_CSS=https://develop.tna.dblclk.dev/enrichment/css/logo-adornments.css
       - FEATURE_LOGO_ADORNMENTS_JS=https://develop.tna.dblclk.dev/enrichment/js/logo-adornments.js
       - ALLOW_INSECURE=true
-    # depends_on:
-    #   - cms
-    #   - search_api
     expose:
       - 8080
   frontend-enrichment:
@@ -140,7 +133,7 @@ services:
       - ALLOW_INSECURE=true
     expose:
       - 8080
-  sitemap_search:
+  sitemap-search:
     image: ghcr.io/nationalarchives/ds-sitemap-search:25.03.11.37
     env_file:
       - .env
@@ -179,50 +172,6 @@ services:
       - pgdata:/var/lib/postgresql/data:rw
     expose:
       - 5432
-  # cms:
-  #   image: ghcr.io/nationalarchives/ds-wagtail:24.11.20.518
-  #   env_file:
-  #     - .env
-  #   environment:
-  #     - ENVIRONMENT=production
-  #     - DJANGO_SETTINGS_MODULE=config.settings.production
-  #     - ALLOWED_HOSTS=develop.tna.dblclk.dev,tna.dblclk.dev,*
-  #     - WAGTAILADMIN_BASE_URL=https://tna.dblclk.dev
-  #     - CSRF_TRUSTED_ORIGIN=https://tna.dblclk.dev
-  #     - DATABASE_HOST=postgres
-  #     - DATABASE_PORT=5432
-  #     - DATABASE_NAME=etna
-  #     - DATABASE_USER=etna
-  #     - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
-  #     - DATABASE_ENGINE=django.db.backends.postgresql
-  #     - KONG_CLIENT_BASE_URL=https://aa83a1e6831944fa8bcf17f5ce391b73-58be9fd587cba13e.elb.eu-west-2.amazonaws.com/api/v1/data
-  #     - KONG_IMAGE_PREVIEW_BASE_URL=https://ciim-media.s3.eu-west-2.amazonaws.com/preview/
-  #     - KONG_CLIENT_KEY=${KONG_CLIENT_KEY}
-  #     - KONG_CLIENT_VERIFY_CERTIFICATES=false
-  #     - REDIS_URL=redis://:redis@redis:6379
-  #   depends_on:
-  #     - postgres
-  #     - redis
-  #   volumes:
-  #     - media:/app/media:rw
-  #   expose:
-  #     - 8080
-  # search_api:
-  #   image: ghcr.io/nationalarchives/ds-search-api:24.08.20.96
-  #   env_file:
-  #     - .env
-  #   environment:
-  #     - ENVIRONMENT=production
-  #     - CONFIG=config.Staging
-  #     - SECRET_KEY=${SECRET_KEY}
-  #     - SENTRY_DSN=https://3e24f4f474026e113e6dcdeccf2abded@o1230303.ingest.us.sentry.io/4507458864087040
-  #     # - WAGTAIL_API_URL=http://cms:8080/api/v2
-  #     - WAGTAIL_API_URL=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site/api/v2
-  #     - ROSETTA_API_URL=http://afa13a7c0067b4f01991b0bad9e003a4-edf0e30af2b95f5f.elb.eu-west-2.amazonaws.com/api/v1
-  #   # depends_on:
-  #   #   - cms
-  #   expose:
-  #     - 8080
   search:
     image: ghcr.io/nationalarchives/ds-search:25.03.12.397
     env_file:
@@ -247,23 +196,6 @@ services:
       - ALLOW_INSECURE=true
     expose:
       - 8080
-  # platform:
-  #   container_name: platform
-  #   build: ./platformsh
-  #   environment:
-  #     - DATABASE_HOST=postgres
-  #     - DATABASE_PORT=5432
-  #     - DATABASE_NAME=etna
-  #     - DATABASE_USER=etna
-  #     - PGPASSWORD=${POSTGRES_PASSWORD}
-  #     - PLATFORM_PROJECT_ID=rasrzs7pi6sd4
-  #     - PLATFORM_ENV=main
-  #     - PLATFORMSH_CLI_TOKEN=${PLATFORMSH_CLI_TOKEN}
-  #   depends_on:
-  #     - postgres
-  #   volumes:
-  #     - db_backups:/home/app/db_backups:rw
-  #     - media:/media:rw
   redis:
     container_name: redis
     image: redis:latest
