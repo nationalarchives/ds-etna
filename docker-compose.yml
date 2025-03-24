@@ -203,7 +203,7 @@ services:
     ports:
       - 6379:6379
   cms:
-    image: ghcr.io/nationalarchives/ds-wagtail:25.03.24.544
+    image: ghcr.io/nationalarchives/ds-wagtail:25.03.24.545
 volumes:
   pgdata:
   media:
