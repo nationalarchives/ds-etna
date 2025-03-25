@@ -173,7 +173,7 @@ services:
     expose:
       - 5432
   search:
-    image: ghcr.io/nationalarchives/ds-search:25.03.24.418
+    image: ghcr.io/nationalarchives/ds-search:25.03.25.425
     env_file:
       - .env
     environment:
