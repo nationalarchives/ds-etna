@@ -125,8 +125,10 @@ services:
       - .env
     environment:
       - ENVIRONMENT=production
+      - ENVIRONMENT_NAME=staging
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
+      - SENTRY_DSN=https://b468f9d9642b5e84c40007ac377c3b1f@o1230303.ingest.us.sentry.io/4509044214071296
       - COOKIE_DOMAIN=.dblclk.dev
       - CACHE_DEFAULT_TIMEOUT=3600
       - CACHE_HEADER_DURATION=31536000

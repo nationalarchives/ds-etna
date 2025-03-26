@@ -2,6 +2,8 @@
 ssl/*.pem
 ssl/*.key
 .env
+.idea
+.vscode
 certbot
 !certbot/conf/.gitkeep
 !certbot/www/.gitkeep
