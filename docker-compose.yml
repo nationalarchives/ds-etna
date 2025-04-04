@@ -1,7 +1,6 @@
 version: '3'
 services:
   nginx:
-    container_name: nginx
     image: nginx:latest
     depends_on:
       - frontend
@@ -17,7 +16,6 @@ services:
       - ./certbot/www/:/var/www/certbot/:ro
       - ./certbot/conf/:/etc/nginx/ssl/:ro
   certbot:
-    container_name: certbot
     image: certbot/certbot:latest
     depends_on:
       - nginx
@@ -130,7 +128,6 @@ services:
     expose:
       - 8080
   postgres:
-    container_name: postgres
     image: postgres:13
     env_file:
       - .env
@@ -168,7 +165,6 @@ services:
     expose:
       - 8080
   redis:
-    container_name: redis
     image: redis:latest
     command: /bin/sh -c "redis-server --requirepass redis"
     ports:
