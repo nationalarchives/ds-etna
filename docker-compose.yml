@@ -169,7 +169,15 @@ services:
     command: /bin/sh -c "redis-server --requirepass redis"
     ports:
       - 6379:6379
+  uptime-kuma:
+    image: louislam/uptime-kuma:beta
+    restart: unless-stopped
+    ports:
+      - 3001:3001
+    volumes:
+      - uptime_kuma:/app/data
 volumes:
   pgdata:
   media:
   db_backups:
+  uptime_kuma:
