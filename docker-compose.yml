@@ -140,7 +140,7 @@ services:
     expose:
       - 5432
   search:
-    image: ghcr.io/nationalarchives/ds-search:25.04.02.488
+    image: ghcr.io/nationalarchives/ds-search:25.04.08.489
     env_file:
       - .env
     environment:
