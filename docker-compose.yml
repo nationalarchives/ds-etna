@@ -44,7 +44,7 @@ services:
       - CSP_WORKER_SRC='self',blob:,https://tna.dblclk.dev
       - CSP_FRAME_SRC='self',https://www.youtube-nocookie.com
       - CSP_FEATURE_PICTURE_IN_PICTURE='self',https://www.youtube-nocookie.com
-      - FRAME_DOMAIN_ALLOW=https://beta.nationalarchives.gov.uk
+      - CSP_FRAME_ANCESTORS=https://beta.nationalarchives.gov.uk
       - CACHE_DEFAULT_TIMEOUT=10
       - GA4_ID=GTM-KX8ZWVZG
       - ALLOW_INSECURE=true
@@ -75,7 +75,7 @@ services:
       - CSP_WORKER_SRC='self',blob:,https://develop.tna.dblclk.dev
       - CSP_FRAME_SRC='self',https://www.youtube-nocookie.com,https://www.eventbrite.com,https://www.openstreetmap.org
       - CSP_FEATURE_PICTURE_IN_PICTURE='self',https://www.youtube-nocookie.com
-      - FRAME_DOMAIN_ALLOW=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
+      - CSP_FRAME_ANCESTORS=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
       - CACHE_DEFAULT_TIMEOUT=10
       - CACHE_HEADER_DURATION=31536000
       - GA4_ID=GTM-KX8ZWVZG
