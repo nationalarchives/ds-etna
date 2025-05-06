@@ -1,6 +1,7 @@
 version: '3'
 services:
   nginx:
+    container_name: nginx
     image: nginx:latest
     depends_on:
       - frontend
@@ -23,6 +24,7 @@ services:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
   frontend:
+    container_name: frontend
     image: ghcr.io/nationalarchives/ds-frontend:25.05.06.1164
     env_file:
       - .env
@@ -54,6 +56,7 @@ services:
       #   - ./certbot/conf/live/tna.dblclk.dev/fullchain.pem:/home/app/ssl/cert.pem
       #   - ./certbot/conf/live/tna.dblclk.dev/privkey.pem:/home/app/ssl/key.pem
   frontend-develop:
+    container_name: frontend-develop
     image: ghcr.io/nationalarchives/ds-frontend:25.05.06.1164
     env_file:
       - .env
@@ -86,6 +89,7 @@ services:
     expose:
       - 8080
   frontend-enrichment:
+    container_name: frontend-enrichment
     image: ghcr.io/nationalarchives/ds-frontend-enrichment:25.04.22.33
     env_file:
       - .env
@@ -102,6 +106,7 @@ services:
     expose:
       - 8080
   sitemap-search:
+    container_name: sitemap-search
     image: ghcr.io/nationalarchives/ds-sitemap-search:25.05.06.44
     env_file:
       - .env
@@ -128,6 +133,7 @@ services:
     expose:
       - 8080
   postgres:
+    container_name: postgres
     image: postgres:13
     env_file:
       - .env
@@ -140,6 +146,7 @@ services:
     expose:
       - 5432
   search:
+    container_name: search
     image: ghcr.io/nationalarchives/ds-search:25.05.06.562
     env_file:
       - .env
@@ -169,11 +176,13 @@ services:
     expose:
       - 8080
   redis:
+    container_name: redis
     image: redis:latest
     command: /bin/sh -c "redis-server --requirepass redis"
     ports:
       - 6379:6379
   uptime-kuma:
+    container_name: uptime-kuma
     image: louislam/uptime-kuma:beta
     restart: unless-stopped
     ports:
@@ -181,6 +190,7 @@ services:
     volumes:
       - uptime_kuma:/app/data
   portainer:
+    container_name: portainer
     image: portainer/portainer-ce:latest
     restart: unless-stopped
     ports:
