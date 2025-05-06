@@ -180,8 +180,17 @@ services:
       - 3001:3001
     volumes:
       - uptime_kuma:/app/data
+  portainer:
+    image: portainer/portainer-ce:latest
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
 volumes:
   pgdata:
   media:
   db_backups:
   uptime_kuma:
+  portainer_data:
