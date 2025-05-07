@@ -90,7 +90,7 @@ services:
       - 8080
   frontend-enrichment:
     container_name: frontend-enrichment
-    image: ghcr.io/nationalarchives/ds-frontend-enrichment:25.04.22.33
+    image: ghcr.io/nationalarchives/ds-frontend-enrichment:25.05.07.34
     env_file:
       - .env
     environment:
