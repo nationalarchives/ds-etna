@@ -49,7 +49,7 @@ services:
       - CSP_FRAME_ANCESTORS=https://beta.nationalarchives.gov.uk
       - CACHE_DEFAULT_TIMEOUT=10
       - CACHE_TYPE=RedisCache
-      - CACHE_REDIS_URL=redis://${REDIS_PASSWORD}@redis:6379/0
+      - CACHE_REDIS_URL=redis://redis:${REDIS_PASSWORD}@redis:6379/0
       - GA4_ID=GTM-KX8ZWVZG
       - ALLOW_INSECURE=true
     expose:
@@ -84,7 +84,7 @@ services:
       - CACHE_DEFAULT_TIMEOUT=10
       - CACHE_HEADER_DURATION=31536000
       - CACHE_TYPE=RedisCache
-      - CACHE_REDIS_URL=redis://${REDIS_PASSWORD}@redis:6379/1
+      - CACHE_REDIS_URL=redis://redis:${REDIS_PASSWORD}@redis:6379/1
       - GA4_ID=GTM-KX8ZWVZG
       # - FEATURE_NEW_ETC_HOMEPAGE=True
       - FEATURE_LOGO_ADORNMENTS_CSS=https://develop.tna.dblclk.dev/enrichment/css/logo-adornments.css
@@ -182,7 +182,7 @@ services:
   redis:
     container_name: redis
     image: redis:latest
-    command: /bin/sh -c "redis-server --requirepass ${REDIS_PASSWORD}"
+    command: /bin/sh -c "redis-server --user redis --requirepass ${REDIS_PASSWORD}"
     env_file:
       - .env
     environment:
