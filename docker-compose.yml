@@ -48,8 +48,8 @@ services:
       - CSP_FEATURE_PICTURE_IN_PICTURE='self',https://www.youtube-nocookie.com
       - CSP_FRAME_ANCESTORS=https://beta.nationalarchives.gov.uk
       - CACHE_DEFAULT_TIMEOUT=10
-      - CACHE_TYPE=RedisCache
-      - CACHE_REDIS_URL=redis://redis:${REDIS_PASSWORD}@redis:6379/0
+      # - CACHE_TYPE=RedisCache
+      # - CACHE_REDIS_URL=redis://redis:${REDIS_PASSWORD}@redis:6379/0
       - GA4_ID=GTM-KX8ZWVZG
       - ALLOW_INSECURE=true
     expose:
@@ -83,8 +83,8 @@ services:
       - CSP_FRAME_ANCESTORS=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
       - CACHE_DEFAULT_TIMEOUT=10
       - CACHE_HEADER_DURATION=31536000
-      - CACHE_TYPE=RedisCache
-      - CACHE_REDIS_URL=redis://redis:${REDIS_PASSWORD}@redis:6379/1
+      # - CACHE_TYPE=RedisCache
+      # - CACHE_REDIS_URL=redis://redis:${REDIS_PASSWORD}@redis:6379/1
       - GA4_ID=GTM-KX8ZWVZG
       # - FEATURE_NEW_ETC_HOMEPAGE=True
       - FEATURE_LOGO_ADORNMENTS_CSS=https://develop.tna.dblclk.dev/enrichment/css/logo-adornments.css
