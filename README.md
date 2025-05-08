@@ -30,11 +30,3 @@ docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certb
 # Renew cert
 docker compose run --rm certbot renew
 ```
-
-```sh
-npm install
-npx playwright test
-npx playwright test --ui
-npx playwright test --update-snapshots
-TEST_DOMAIN=https://develop.tna.dblclk.dev npx playwright test
-```
