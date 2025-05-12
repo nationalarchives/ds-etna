@@ -172,7 +172,7 @@ services:
       - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
       - CSP_IMG_SRC='self',https://beta.nationalarchives.gov.uk
       - CSP_FRAME_SRC='self',https://www.youtube.com
-      - ROSETTA_API_URL=http://rosetta-staging.k-int.com/rosetta/data
+      - ROSETTA_API_URL=https://rosetta-staging.k-int.com/rosetta/data
       - ALLOW_INSECURE=true
       - DELIVERY_OPTIONS_API_URL=http://discovery-services.live.local/DiscoveryDeliveryOptionsapi/api/DeliveryOptions
       - DCS_PREFIXES=LEV
