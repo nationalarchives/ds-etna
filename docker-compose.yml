@@ -226,6 +226,7 @@ services:
       - 8080
     volumes:
       - matomo_data:/var/www/html:rw
+      - ./conf/matomo/config.ini.php:/www/html/config/config.ini.php:ro
   mysql:
     container_name: mysql
     image: mysql:lts
@@ -238,7 +239,6 @@ services:
       - MYSQL_PASSWORD=${MYSQL_MATOMO_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql:rw
-      - ./conf/matomo/config.ini.php:/www/html/config/config.ini.php:ro
       
 volumes:
   pgdata:
