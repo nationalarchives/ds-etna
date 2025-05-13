@@ -210,10 +210,39 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
+  matomo:
+    container_name: matomo
+    image: matomo:latest
+    env_file:
+      - .env
+    environment:
+      - MATOMO_DATABASE_HOST=mysql
+      - MATOMO_DATABASE_ADAPTER=mysql
+      - MATOMO_DATABASE_USERNAME=matomo
+      - MATOMO_DATABASE_PASSWORD=${MYSQL_MATOMO_PASSWORD}
+      - MATOMO_DATABASE_DBNAME=matomo
+    restart: unless-stopped
+    expose:
+      - 8080
+    volumes:
+      - matomo_data:/var/www/html:rw
+  mysql:
+    container_name: mysql
+    image: mysql:lts
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=matomo
+      - MYSQL_USER=matomo
+      - MYSQL_PASSWORD=${MYSQL_MATOMO_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql:rw
 volumes:
   pgdata:
   media:
   redis_data:
-  db_backups:
   uptime_kuma:
   portainer_data:
+  matomo_data:
+  mysql_data:
