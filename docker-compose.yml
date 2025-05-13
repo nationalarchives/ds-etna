@@ -238,7 +238,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_MATOMO_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql:rw
-      - ./conf/matomo/config.ini.php:config/config.ini.php:ro
+      - ./conf/matomo/config.ini.php:/www/html/config/config.ini.php:ro
       
 volumes:
   pgdata:
