@@ -227,6 +227,7 @@ services:
     volumes:
       - matomo_data:/var/www/html:rw
       - ./conf/matomo/config.ini.php:/www/html/config/config.ini.php:ro
+      - ./conf/matomo/000-default.conf:/etc/apache2/sites-available/000-default.conf
   mysql:
     container_name: mysql
     image: mysql:lts
