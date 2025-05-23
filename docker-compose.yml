@@ -112,7 +112,7 @@ services:
       - 8080
   sitemap-search:
     container_name: sitemap-search
-    image: ghcr.io/nationalarchives/ds-sitemap-search:25.05.20.46
+    image: ghcr.io/nationalarchives/ds-sitemap-search:25.05.23.47
     env_file:
       - .env
     environment:
