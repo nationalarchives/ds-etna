@@ -4,9 +4,9 @@ services:
     container_name: nginx
     image: nginx:latest
     depends_on:
-      - frontend
-      - frontend-develop
-      - frontend-enrichment
+      # - frontend
+      # - frontend-develop
+      # - frontend-enrichment
       - sitemap-search
       - search
     ports:
@@ -24,92 +24,92 @@ services:
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
-  frontend:
-    container_name: frontend
-    image: ghcr.io/nationalarchives/ds-frontend:25.06.09.1218
-    env_file:
-      - .env
-    environment:
-      - ENVIRONMENT=production
-      - ENVIRONMENT_NAME=staging
-      - CONFIG=config.Staging
-      - SECRET_KEY=${SECRET_KEY}
-      # - SENTRY_DSN=https://cd29dbbbe0df9acf5c001eb0da230525@o1230303.ingest.us.sentry.io/4507423798853632
-      # - SENTRY_JS=https://js.sentry-cdn.com/f736865f0e1fb140b8192082e1bfb5ad.min.js
-      - WAGTAIL_API_URL=https://beta.nationalarchives.gov.uk/api/v2
-      - COOKIE_DOMAIN=.dblclk.dev
-      - CSP_IMG_SRC='self',https://tna.dblclk.dev,https://beta.nationalarchives.gov.uk,https://i.ytimg.com,https://www.googletagmanager.com
-      - CSP_SCRIPT_SRC_ELEM='self',https://www.googletagmanager.com,https://*.sentry-cdn.com,https://www.youtube.com
-      - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
-      - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
-      - CSP_CONNECT_SRC='self',https://*.google-analytics.com,https://*.sentry.io,https://noembed.com
-      - CSP_MEDIA_SRC='self',https://beta.nationalarchives.gov.uk
-      - CSP_WORKER_SRC='self',blob:,https://tna.dblclk.dev
-      - CSP_FRAME_SRC='self',https://www.youtube-nocookie.com
-      - CSP_FEATURE_PICTURE_IN_PICTURE='self',https://www.youtube-nocookie.com
-      - CSP_FRAME_ANCESTORS=https://beta.nationalarchives.gov.uk
-      - CACHE_DEFAULT_TIMEOUT=10
-      # - CACHE_TYPE=RedisCache
-      # - CACHE_REDIS_URL=redis://redis:${REDIS_PASSWORD}@redis:6379/0
-      - GA4_ID=GTM-KX8ZWVZG
-      - ALLOW_INSECURE=true
-    expose:
-      - 8080
-      # volumes:
-      #   - ./certbot/conf/live/tna.dblclk.dev/fullchain.pem:/home/app/ssl/cert.pem
-      #   - ./certbot/conf/live/tna.dblclk.dev/privkey.pem:/home/app/ssl/key.pem
-  frontend-develop:
-    container_name: frontend-develop
-    image: ghcr.io/nationalarchives/ds-frontend:25.06.09.1218
-    env_file:
-      - .env
-    environment:
-      - ENVIRONMENT=production
-      - ENVIRONMENT_NAME=develop
-      - CONFIG=config.Staging
-      - SECRET_KEY=${SECRET_KEY}
-      # - SENTRY_DSN=https://cd29dbbbe0df9acf5c001eb0da230525@o1230303.ingest.us.sentry.io/4507423798853632
-      # - SENTRY_JS=https://js.sentry-cdn.com/f736865f0e1fb140b8192082e1bfb5ad.min.js
-      - WAGTAIL_API_URL=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site/api/v2
-      - COOKIE_DOMAIN=.dblclk.dev
-      - CSP_IMG_SRC='self',https://develop.tna.dblclk.dev,https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site,https://*.nationalarchives.gov.uk,https://i.ytimg.com,https://img.youtube.com,https://www.googletagmanager.com,https://img.evbuc.com,https://picsum.photos,https://*.picsum.photos
-      - CSP_SCRIPT_SRC_ELEM='self',https://www.googletagmanager.com,https://*.sentry-cdn.com,https://www.youtube.com,https://www.eventbrite.com
-      - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
-      - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
-      - CSP_CONNECT_SRC='self',https://*.google-analytics.com,https://*.sentry.io,https://noembed.com
-      - CSP_MEDIA_SRC='self',https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
-      - CSP_WORKER_SRC='self',blob:,https://develop.tna.dblclk.dev
-      - CSP_FRAME_SRC='self',https://www.youtube-nocookie.com,https://www.eventbrite.com,https://www.openstreetmap.org
-      - CSP_FEATURE_PICTURE_IN_PICTURE='self',https://www.youtube-nocookie.com
-      - CSP_FRAME_ANCESTORS=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
-      - CACHE_DEFAULT_TIMEOUT=10
-      - CACHE_HEADER_DURATION=31536000
-      # - CACHE_TYPE=RedisCache
-      # - CACHE_REDIS_URL=redis://redis:${REDIS_PASSWORD}@redis:6379/1
-      - GA4_ID=GTM-KX8ZWVZG
-      # - FEATURE_NEW_ETC_HOMEPAGE=True
-      - FEATURE_LOGO_ADORNMENTS_CSS=https://develop.tna.dblclk.dev/enrichment/css/logo-adornments.css
-      - FEATURE_LOGO_ADORNMENTS_JS=https://develop.tna.dblclk.dev/enrichment/js/logo-adornments.js
-      - ALLOW_INSECURE=true
-    expose:
-      - 8080
-  frontend-enrichment:
-    container_name: frontend-enrichment
-    image: ghcr.io/nationalarchives/ds-frontend-enrichment:25.06.02.37
-    env_file:
-      - .env
-    environment:
-      - ENVIRONMENT=production
-      - ENVIRONMENT_NAME=staging
-      - CONFIG=config.Staging
-      - SECRET_KEY=${SECRET_KEY}
-      # - SENTRY_DSN=https://b468f9d9642b5e84c40007ac377c3b1f@o1230303.ingest.us.sentry.io/4509044214071296
-      - COOKIE_DOMAIN=.dblclk.dev
-      - CACHE_DEFAULT_TIMEOUT=3600
-      - CACHE_HEADER_DURATION=31536000
-      - ALLOW_INSECURE=true
-    expose:
-      - 8080
+  # frontend:
+  #   container_name: frontend
+  #   image: ghcr.io/nationalarchives/ds-frontend:25.05.30.1210
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - ENVIRONMENT=production
+  #     - ENVIRONMENT_NAME=staging
+  #     - CONFIG=config.Staging
+  #     - SECRET_KEY=${SECRET_KEY}
+  #     # - SENTRY_DSN=https://cd29dbbbe0df9acf5c001eb0da230525@o1230303.ingest.us.sentry.io/4507423798853632
+  #     # - SENTRY_JS=https://js.sentry-cdn.com/f736865f0e1fb140b8192082e1bfb5ad.min.js
+  #     - WAGTAIL_API_URL=https://beta.nationalarchives.gov.uk/api/v2
+  #     - COOKIE_DOMAIN=.dblclk.dev
+  #     - CSP_IMG_SRC='self',https://tna.dblclk.dev,https://beta.nationalarchives.gov.uk,https://i.ytimg.com,https://www.googletagmanager.com
+  #     - CSP_SCRIPT_SRC_ELEM='self',https://www.googletagmanager.com,https://*.sentry-cdn.com,https://www.youtube.com
+  #     - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
+  #     - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
+  #     - CSP_CONNECT_SRC='self',https://*.google-analytics.com,https://*.sentry.io,https://noembed.com
+  #     - CSP_MEDIA_SRC='self',https://beta.nationalarchives.gov.uk
+  #     - CSP_WORKER_SRC='self',blob:,https://tna.dblclk.dev
+  #     - CSP_FRAME_SRC='self',https://www.youtube-nocookie.com
+  #     - CSP_FEATURE_PICTURE_IN_PICTURE='self',https://www.youtube-nocookie.com
+  #     - CSP_FRAME_ANCESTORS=https://beta.nationalarchives.gov.uk
+  #     - CACHE_DEFAULT_TIMEOUT=10
+  #     # - CACHE_TYPE=RedisCache
+  #     # - CACHE_REDIS_URL=redis://redis:${REDIS_PASSWORD}@redis:6379/0
+  #     - GA4_ID=GTM-KX8ZWVZG
+  #     - ALLOW_INSECURE=true
+  #   expose:
+  #     - 8080
+  #     # volumes:
+  #     #   - ./certbot/conf/live/tna.dblclk.dev/fullchain.pem:/home/app/ssl/cert.pem
+  #     #   - ./certbot/conf/live/tna.dblclk.dev/privkey.pem:/home/app/ssl/key.pem
+  # frontend-develop:
+  #   container_name: frontend-develop
+  #   image: ghcr.io/nationalarchives/ds-frontend:25.05.30.1210
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - ENVIRONMENT=production
+  #     - ENVIRONMENT_NAME=develop
+  #     - CONFIG=config.Staging
+  #     - SECRET_KEY=${SECRET_KEY}
+  #     # - SENTRY_DSN=https://cd29dbbbe0df9acf5c001eb0da230525@o1230303.ingest.us.sentry.io/4507423798853632
+  #     # - SENTRY_JS=https://js.sentry-cdn.com/f736865f0e1fb140b8192082e1bfb5ad.min.js
+  #     - WAGTAIL_API_URL=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site/api/v2
+  #     - COOKIE_DOMAIN=.dblclk.dev
+  #     - CSP_IMG_SRC='self',https://develop.tna.dblclk.dev,https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site,https://*.nationalarchives.gov.uk,https://i.ytimg.com,https://img.youtube.com,https://www.googletagmanager.com,https://img.evbuc.com,https://picsum.photos,https://*.picsum.photos
+  #     - CSP_SCRIPT_SRC_ELEM='self',https://www.googletagmanager.com,https://*.sentry-cdn.com,https://www.youtube.com,https://www.eventbrite.com
+  #     - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
+  #     - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
+  #     - CSP_CONNECT_SRC='self',https://*.google-analytics.com,https://*.sentry.io,https://noembed.com
+  #     - CSP_MEDIA_SRC='self',https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
+  #     - CSP_WORKER_SRC='self',blob:,https://develop.tna.dblclk.dev
+  #     - CSP_FRAME_SRC='self',https://www.youtube-nocookie.com,https://www.eventbrite.com,https://www.openstreetmap.org
+  #     - CSP_FEATURE_PICTURE_IN_PICTURE='self',https://www.youtube-nocookie.com
+  #     - CSP_FRAME_ANCESTORS=https://develop-sr3snxi-rasrzs7pi6sd4.uk-1.platformsh.site
+  #     - CACHE_DEFAULT_TIMEOUT=10
+  #     - CACHE_HEADER_DURATION=31536000
+  #     # - CACHE_TYPE=RedisCache
+  #     # - CACHE_REDIS_URL=redis://redis:${REDIS_PASSWORD}@redis:6379/1
+  #     - GA4_ID=GTM-KX8ZWVZG
+  #     # - FEATURE_NEW_ETC_HOMEPAGE=True
+  #     - FEATURE_LOGO_ADORNMENTS_CSS=https://develop.tna.dblclk.dev/enrichment/css/logo-adornments.css
+  #     - FEATURE_LOGO_ADORNMENTS_JS=https://develop.tna.dblclk.dev/enrichment/js/logo-adornments.js
+  #     - ALLOW_INSECURE=true
+  #   expose:
+  #     - 8080
+  # frontend-enrichment:
+  #   container_name: frontend-enrichment
+  #   image: ghcr.io/nationalarchives/ds-frontend-enrichment:25.05.20.36
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - ENVIRONMENT=production
+  #     - ENVIRONMENT_NAME=staging
+  #     - CONFIG=config.Staging
+  #     - SECRET_KEY=${SECRET_KEY}
+  #     # - SENTRY_DSN=https://b468f9d9642b5e84c40007ac377c3b1f@o1230303.ingest.us.sentry.io/4509044214071296
+  #     - COOKIE_DOMAIN=.dblclk.dev
+  #     - CACHE_DEFAULT_TIMEOUT=3600
+  #     - CACHE_HEADER_DURATION=31536000
+  #     - ALLOW_INSECURE=true
+  #   expose:
+  #     - 8080
   sitemap-search:
     container_name: sitemap-search
     image: ghcr.io/nationalarchives/ds-sitemap-search:25.05.23.47
