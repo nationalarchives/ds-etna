@@ -238,9 +238,9 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql:rw
   frontend:
-    image: ghcr.io/nationalarchives/ds-frontend:25.06.11.1221
+    image: ghcr.io/nationalarchives/ds-frontend:25.06.13.1224
   frontend-develop:
-    image: ghcr.io/nationalarchives/ds-frontend:25.06.11.1221
+    image: ghcr.io/nationalarchives/ds-frontend:25.06.13.1224
 volumes:
   pgdata:
   media:
