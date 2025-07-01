@@ -152,7 +152,7 @@ services:
       - 5432
   search:
     container_name: search
-    image: ghcr.io/nationalarchives/ds-search:25.07.01.799
+    image: ghcr.io/nationalarchives/ds-search:25.07.01.802
     env_file:
       - .env
     environment:
