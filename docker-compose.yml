@@ -105,7 +105,7 @@ services:
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
       - WAGTAIL_API_URL=https://dev-wagtail.nationalarchives.gov.uk/api/v2
-      - WAGTAIL_SITE_HOSTNAME=dev-wagtail.nationalarchives.gov.uk
+      - WAGTAIL_SITE_HOSTNAME=wagtail-docs.tna.dblclk.dev
       - COOKIE_DOMAIN=.dblclk.dev
       - CSP_IMG_SRC='self',https://dev-wagtail.nationalarchives.gov.uk,https://*.nationalarchives.gov.uk,https://i.ytimg.com,https://img.youtube.com,https://www.googletagmanager.com,https://img.evbuc.com,https://picsum.photos,https://*.picsum.photos
       - CSP_SCRIPT_SRC_ELEM='self',https://www.googletagmanager.com,https://*.sentry-cdn.com,https://www.youtube.com
