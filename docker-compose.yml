@@ -30,7 +30,7 @@ services:
     env_file:
       - .env
     environment:
-      - ENVIRONMENT=production
+      - RUNTIME=production
       - ENVIRONMENT_NAME=staging
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
@@ -65,7 +65,7 @@ services:
   #   env_file:
   #     - .env
   #   environment:
-  #     - ENVIRONMENT=production
+  #     - RUNTIME=production
   #     - ENVIRONMENT_NAME=develop
   #     - CONFIG=config.Staging
   #     - SECRET_KEY=${SECRET_KEY}
@@ -100,7 +100,7 @@ services:
     env_file:
       - .env
     environment:
-      - ENVIRONMENT=production
+      - RUNTIME=production
       - ENVIRONMENT_NAME=develop
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
@@ -133,7 +133,7 @@ services:
   #   env_file:
   #     - .env
   #   environment:
-  #     - ENVIRONMENT=production
+  #     - RUNTIME=production
   #     - ENVIRONMENT_NAME=staging
   #     - CONFIG=config.Staging
   #     - SECRET_KEY=${SECRET_KEY}
@@ -150,7 +150,7 @@ services:
     env_file:
       - .env
     environment:
-      - ENVIRONMENT=production
+      - RUNTIME=production
       - ENVIRONMENT_NAME=develop
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
@@ -163,7 +163,7 @@ services:
       - DB_USERNAME=etna
       - DB_PASSWORD=${POSTGRES_PASSWORD}
       - CACHE_DEFAULT_TIMEOUT=3600
-      - SITEMAPS=https://www.nationalarchives.gov.uk/sitemap.xml,https://blog.nationalarchives.gov.uk/sitemap_index.xml,https://develop.tna.dblclk.dev/sitemap.xml,https://nationalarchives.github.io/design-system/sitemap.xml
+      - SITEMAPS=https://www.nationalarchives.gov.uk/sitemap.xml,https://design-system.nationalarchives.gov.uk/sitemap.xml,https://blog.nationalarchives.gov.uk/sitemap.xml
       - POPULATE_ON_STARTUP=False
       - ALLOW_INSECURE=true
       - WEBARCHIVE_REWRITE_DOMAINS=blog.nationalarchives.gov.uk
@@ -190,7 +190,7 @@ services:
     env_file:
       - .env
     environment:
-      - ENVIRONMENT=production
+      - RUNTIME=production
       - ENVIRONMENT_NAME=develop
       - SENTRY_DSN=https://3e24f4f474026e113e6dcdeccf2abded@o1230303.ingest.us.sentry.io/4507458864087040
       - DJANGO_SETTINGS_MODULE=config.settings.staging
