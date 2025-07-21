@@ -184,8 +184,8 @@ services:
       - pgdata:/var/lib/postgresql/data:rw
     expose:
       - 5432
-  search:
-    container_name: search
+  catalogue:
+    container_name: catalogue
     image: ghcr.io/nationalarchives/ds-catalogue:25.07.18.856
     env_file:
       - .env
