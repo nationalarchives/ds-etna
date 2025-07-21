@@ -219,7 +219,7 @@ services:
       - 8080
   request-a-service-record:
     container_name: request-a-service-record
-    image: ghcr.io/nationalarchives/ds-request-service-record:25.07.21.4
+    image: ghcr.io/nationalarchives/ds-request-service-record:25.07.21.5
     env_file:
       - .env
     environment:
