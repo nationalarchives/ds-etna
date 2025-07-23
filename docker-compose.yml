@@ -204,8 +204,9 @@ services:
       # - DATABASE_ENGINE=django.db.backends.postgresql
       - COOKIE_DOMAIN=tna.dblclk.dev
       - CSP_STYLE_SRC_ELEM='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
+      - CSP_SCRIPT_SRC_ELEM='self',https://www.googletagmanager.com/gtm.js
       - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
-      - CSP_IMG_SRC='self',https://www.nationalarchives.gov.uk
+      - CSP_IMG_SRC='self',https://www.nationalarchives.gov.uk,https://www.googletagmanager.com
       - CSP_FRAME_SRC='self',https://www.youtube.com
       - ROSETTA_API_URL=https://rosetta-staging.k-int.com/rosetta/data
       - ALLOW_INSECURE=true
