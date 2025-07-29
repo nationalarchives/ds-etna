@@ -186,7 +186,7 @@ services:
       - 5432
   catalogue:
     container_name: catalogue
-    image: ghcr.io/nationalarchives/ds-catalogue:25.07.29.896
+    image: ghcr.io/nationalarchives/ds-catalogue:25.07.29.898
     env_file:
       - .env
     environment:
