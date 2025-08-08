@@ -26,7 +26,7 @@ services:
       - ./certbot/conf/:/etc/letsencrypt/:rw
   frontend:
     container_name: frontend
-    image: ghcr.io/nationalarchives/ds-frontend:25.08.08.1354
+    image: ghcr.io/nationalarchives/ds-frontend:25.08.08.1355
     env_file:
       - .env
     environment:
@@ -96,7 +96,7 @@ services:
   #     - 8080
   frontend-wagtail-docs:
     container_name: frontend-wagtail-docs
-    image: ghcr.io/nationalarchives/ds-frontend:25.08.08.1354
+    image: ghcr.io/nationalarchives/ds-frontend:25.08.08.1355
     env_file:
       - .env
     environment:
