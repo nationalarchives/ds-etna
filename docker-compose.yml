@@ -240,6 +240,24 @@ services:
       - ALLOW_INSECURE=true
     expose:
       - 8080
+  service-status:
+    container_name: service-status
+    image: ghcr.io/nationalarchives/ds-request-service-record:25.08.08.67
+    env_file:
+      - .env
+    environment:
+      - RUNTIME=production
+      - ENVIRONMENT_NAME=staging
+      - CONFIG=config.Staging
+      - SECRET_KEY=${SECRET_KEY}
+      - COOKIE_DOMAIN=tna.dblclk.dev
+      - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
+      - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
+      - UPTIME_KUMA_API_URL=https://uptime.tna.dblclk.dev/api
+      - UPTIME_KUMA_STATUS_PAGE_SLUG=nationalarchives
+      - ALLOW_INSECURE=true
+    expose:
+      - 8080
   redis:
     container_name: redis
     image: redis:latest
