@@ -223,6 +223,8 @@ services:
     image: ghcr.io/nationalarchives/ds-request-service-record:25.08.20.127
     env_file:
       - .env
+    needs:
+      - postgres
     environment:
       - RUNTIME=production
       - ENVIRONMENT_NAME=staging
@@ -238,6 +240,7 @@ services:
       # - CACHE_REDIS_URL=redis://redis:${REDIS_PASSWORD}@redis:6379/0
       # - GA4_ID=GTM-KX8ZWVZG
       - ALLOW_INSECURE=true
+      - SQLALCHEMY_DATABASE_URI=postgresql://etna:${POSTGRES_PASSWORD}@postgres:5432/postgres
     expose:
       - 8080
   service-status:
