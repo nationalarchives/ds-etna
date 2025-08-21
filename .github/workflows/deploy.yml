@@ -23,7 +23,7 @@ jobs:
           cd /root/ds-etna
           git pull
           docker compose pull
-          docker compose up -d
+          docker compose up -d --remove-orphans
           docker compose up -d --build --force-recreate nginx
 
   cleanup:
