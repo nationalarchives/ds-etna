@@ -245,7 +245,7 @@ services:
       - ALLOW_INSECURE=true
       - SQLALCHEMY_DATABASE_URI=postgresql://etna:${POSTGRES_PASSWORD}@postgres:5432/postgres
       - REDIS_HOST=redis
-      - REDIS_USERNAME=redis
+      # - REDIS_USERNAME=redis
       - REDIS_PASSWORD=${REDIS_PASSWORD}
       - REDIS_PORT=6379
       - REDIS_DB=0
