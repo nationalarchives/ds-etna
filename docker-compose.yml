@@ -191,7 +191,7 @@ services:
       - 8080:8080
   catalogue:
     container_name: catalogue
-    image: ghcr.io/nationalarchives/ds-catalogue:25.09.03.1014
+    image: ghcr.io/nationalarchives/ds-catalogue:25.09.04.1019
     env_file:
       - .env
     environment:
