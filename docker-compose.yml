@@ -307,6 +307,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - uptime_kuma:/app/data
+      - ./uptime_kuma_data:/app_data
       - ../uptime_kuma_backups:/backup
   portainer:
     container_name: portainer
