@@ -269,6 +269,7 @@ services:
       - UPTIME_KUMA_JWT=${UPTIME_KUMA_JWT}
       - ALLOW_INSECURE=true
       - CACHE_DEFAULT_TIMEOUT=300
+      - SENTRY_DSN=https://f0dfd41f5e17da117bde6cde2371045f@o1230303.ingest.us.sentry.io/4509966773387264
     expose:
       - 8080
   forms:
