@@ -349,6 +349,8 @@ services:
       - MYSQL_PASSWORD=${MYSQL_MATOMO_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql:rw
+  sitemap-search:
+    image: ghcr.io/nationalarchives/ds-sitemap-search:25.09.09.93
 volumes:
   pgdata:
   media:
