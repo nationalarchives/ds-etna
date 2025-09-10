@@ -352,9 +352,9 @@ services:
   sitemap-search:
     image: ghcr.io/nationalarchives/ds-sitemap-search:25.09.10.101
   frontend:
-    image: ghcr.io/nationalarchives/ds-frontend:25.09.10.1407
+    image: ghcr.io/nationalarchives/ds-frontend:25.09.10.1411
   frontend-wagtail-docs:
-    image: ghcr.io/nationalarchives/ds-frontend:25.09.10.1407
+    image: ghcr.io/nationalarchives/ds-frontend:25.09.10.1411
 volumes:
   pgdata:
   media:
