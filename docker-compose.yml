@@ -350,7 +350,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql:rw
   sitemap-search:
-    image: ghcr.io/nationalarchives/ds-sitemap-search:25.09.10.96
+    image: ghcr.io/nationalarchives/ds-sitemap-search:25.09.10.97
 volumes:
   pgdata:
   media:
