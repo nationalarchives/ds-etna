@@ -350,7 +350,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql:rw
   sitemap-search:
-    image: ghcr.io/nationalarchives/ds-sitemap-search:25.09.10.99
+    image: ghcr.io/nationalarchives/ds-sitemap-search:25.09.10.100
   frontend:
     image: ghcr.io/nationalarchives/ds-frontend:25.09.10.1405
   frontend-wagtail-docs:
