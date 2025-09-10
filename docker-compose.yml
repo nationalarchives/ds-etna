@@ -351,6 +351,10 @@ services:
       - mysql_data:/var/lib/mysql:rw
   sitemap-search:
     image: ghcr.io/nationalarchives/ds-sitemap-search:25.09.10.98
+  frontend:
+    image: ghcr.io/nationalarchives/ds-frontend:25.09.10.1405
+  frontend-wagtail-docs:
+    image: ghcr.io/nationalarchives/ds-frontend:25.09.10.1405
 volumes:
   pgdata:
   media:
