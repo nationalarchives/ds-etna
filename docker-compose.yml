@@ -277,7 +277,7 @@ services:
       - 8080
   forms:
     container_name: forms
-    image: ghcr.io/nationalarchives/ds-forms:25.09.11.31
+    image: ghcr.io/nationalarchives/ds-forms:25.09.11.32
     env_file:
       - .env
     environment:
