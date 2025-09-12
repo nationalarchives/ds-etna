@@ -290,6 +290,7 @@ services:
       - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
       - ALLOW_INSECURE=true
       - REDIS_URL=redis://redis:${REDIS_PASSWORD}@redis:6379/1
+      - RATELIMIT_DEFAULT=5 per 5 seconds
     expose:
       - 8080
   redis:
