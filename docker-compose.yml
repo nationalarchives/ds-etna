@@ -247,11 +247,9 @@ services:
       # - GA4_ID=GTM-KX8ZWVZG
       - ALLOW_INSECURE=true
       - SQLALCHEMY_DATABASE_URI=postgresql://etna:${POSTGRES_PASSWORD}@postgres:5432/postgres
-      - REDIS_HOST=redis
-      # - REDIS_USERNAME=redis
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
-      - REDIS_PORT=6379
-      - REDIS_DB=0
+      - SESSION_REDIS_URL=redis://redis:6379/3
+      - CACHE_TYPE=RedisCache
+      - CACHE_REDIS_URL=redis://redis:6379/4
     expose:
       - 8080
   service-status:
