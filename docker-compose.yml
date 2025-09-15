@@ -289,9 +289,12 @@ services:
       - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
       - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
       - ALLOW_INSECURE=true
-      - REDIS_URL=redis://redis:6379/0
-      - SESSION_REDIS_URL=redis://redis:6379/1
+      - SESSION_REDIS_URL=redis://redis:6379/0
+      - RATELIMIT_REDIS_URL=redis://redis:6379/1
       - RATELIMIT_DEFAULT=5 per 5 seconds
+      - ALTCHA_HMAC_KEY=${SECRET_KEY}
+      - CACHE_TYPE=RedisCache
+      - CACHE_REDIS_URL=redis://redis:6379/2
     expose:
       - 8080
   redis:
