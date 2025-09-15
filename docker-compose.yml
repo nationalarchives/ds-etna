@@ -228,7 +228,7 @@ services:
       - 8080
   request-a-service-record:
     container_name: request-a-service-record
-    image: ghcr.io/nationalarchives/ds-request-service-record:25.09.12.215
+    image: ghcr.io/nationalarchives/ds-request-service-record:25.09.15.216
     env_file:
       - .env
     depends_on:
@@ -277,7 +277,7 @@ services:
       - 8080
   forms:
     container_name: forms
-    image: ghcr.io/nationalarchives/ds-forms:25.09.12.38
+    image: ghcr.io/nationalarchives/ds-forms:25.09.15.42
     env_file:
       - .env
     environment:
