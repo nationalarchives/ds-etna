@@ -228,7 +228,7 @@ services:
       - 8080
   request-a-service-record:
     container_name: request-a-service-record
-    image: ghcr.io/nationalarchives/ds-request-service-record:25.11.04.280
+    image: ghcr.io/nationalarchives/ds-request-service-record:25.11.04.282
     env_file:
       - .env
     depends_on:
