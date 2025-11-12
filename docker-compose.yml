@@ -192,40 +192,40 @@ services:
     restart: always
     ports:
       - 8080:8080
-  catalogue:
-    container_name: catalogue
-    image: ghcr.io/nationalarchives/ds-catalogue:25.11.12.1568
-    env_file:
-      - .env
-    environment:
-      - RUNTIME=production
-      - ENVIRONMENT_NAME=develop
-      - SENTRY_DSN=https://3e24f4f474026e113e6dcdeccf2abded@o1230303.ingest.us.sentry.io/4507458864087040
-      - DJANGO_SETTINGS_MODULE=config.settings.staging
-      - ALLOWED_HOSTS=develop.tna.dblclk.dev,tna.dblclk.dev,*
-      - SECRET_KEY=${SECRET_KEY}
-      # - DATABASE_HOST=postgres
-      # - DATABASE_PORT=5432
-      # - DATABASE_NAME=etna
-      # - DATABASE_USER=etna
-      # - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
-      # - DATABASE_ENGINE=django.db.backends.postgresql
-      - COOKIE_DOMAIN=tna.dblclk.dev
-      - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
-      - CSP_SCRIPT_SRC='self',https://www.googletagmanager.com/gtm.js
-      - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
-      - CSP_IMG_SRC='self',https://www.nationalarchives.gov.uk,https://www.googletagmanager.com
-      - CSP_FRAME_SRC='self',https://www.youtube.com
-      - ROSETTA_API_URL=https://rosetta-staging.k-int.com/rosetta/data
-      - ALLOW_INSECURE=true
-      # - DELIVERY_OPTIONS_API_URL=http://discovery-services.live.local/DiscoveryDeliveryOptionsapi/api/DeliveryOptions
-      - DCS_PREFIXES=HO 616,AB 41,J 14,LOC 5,HO 397,ILB 2,LEV 1,GTI 2,GTI 102,ICSA 1,ICSA 2,ICSA 3,ICSA 4,ICSA 5,ICSA 6,ICSA 7,ES 38
-      - STAFFIN_IP_ADDRESSES=172.31.8.0/22,10.96.0.0/13,10.104.0.0/13,10.95.48.0/24,172.31.0.0/21,10.252.16.0/21,10.252.21.0/24,10.114.1.0/24
-      - ONSITE_IP_ADDRESSES=10.136.0.0/19,167.98.93.94/32,10.120.0.0/13,10.112.0.0/13
-      - WAGTAIL_API_URL=https://wagtail.nationalarchives.gov.uk/api/v2
-      - GA4_ID=GTM-KX8ZWVZG
-    expose:
-      - 8080
+  # catalogue:
+  #   container_name: catalogue
+  #   image: ghcr.io/nationalarchives/ds-catalogue:25.11.12.1568
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - RUNTIME=production
+  #     - ENVIRONMENT_NAME=develop
+  #     - SENTRY_DSN=https://3e24f4f474026e113e6dcdeccf2abded@o1230303.ingest.us.sentry.io/4507458864087040
+  #     - DJANGO_SETTINGS_MODULE=config.settings.staging
+  #     - ALLOWED_HOSTS=develop.tna.dblclk.dev,tna.dblclk.dev,*
+  #     - SECRET_KEY=${SECRET_KEY}
+  #     # - DATABASE_HOST=postgres
+  #     # - DATABASE_PORT=5432
+  #     # - DATABASE_NAME=etna
+  #     # - DATABASE_USER=etna
+  #     # - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+  #     # - DATABASE_ENGINE=django.db.backends.postgresql
+  #     - COOKIE_DOMAIN=tna.dblclk.dev
+  #     - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
+  #     - CSP_SCRIPT_SRC='self',https://www.googletagmanager.com/gtm.js
+  #     - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
+  #     - CSP_IMG_SRC='self',https://www.nationalarchives.gov.uk,https://www.googletagmanager.com
+  #     - CSP_FRAME_SRC='self',https://www.youtube.com
+  #     - ROSETTA_API_URL=https://rosetta-staging.k-int.com/rosetta/data
+  #     - ALLOW_INSECURE=true
+  #     # - DELIVERY_OPTIONS_API_URL=http://discovery-services.live.local/DiscoveryDeliveryOptionsapi/api/DeliveryOptions
+  #     - DCS_PREFIXES=HO 616,AB 41,J 14,LOC 5,HO 397,ILB 2,LEV 1,GTI 2,GTI 102,ICSA 1,ICSA 2,ICSA 3,ICSA 4,ICSA 5,ICSA 6,ICSA 7,ES 38
+  #     - STAFFIN_IP_ADDRESSES=172.31.8.0/22,10.96.0.0/13,10.104.0.0/13,10.95.48.0/24,172.31.0.0/21,10.252.16.0/21,10.252.21.0/24,10.114.1.0/24
+  #     - ONSITE_IP_ADDRESSES=10.136.0.0/19,167.98.93.94/32,10.120.0.0/13,10.112.0.0/13
+  #     - WAGTAIL_API_URL=https://wagtail.nationalarchives.gov.uk/api/v2
+  #     - GA4_ID=GTM-KX8ZWVZG
+  #   expose:
+  #     - 8080
   request-a-service-record:
     container_name: request-a-service-record
     image: ghcr.io/nationalarchives/ds-request-service-record:25.11.12.311
