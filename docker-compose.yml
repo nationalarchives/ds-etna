@@ -357,6 +357,8 @@ services:
       - MYSQL_PASSWORD=${MYSQL_MATOMO_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql:rw
+  catalogue:
+    image: ghcr.io/nationalarchives/ds-catalogue:25.11.13.1572
 volumes:
   pgdata:
   media:
