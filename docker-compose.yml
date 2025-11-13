@@ -358,7 +358,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql:rw
   catalogue:
-    image: ghcr.io/nationalarchives/ds-catalogue:25.11.13.1572
+    image: ghcr.io/nationalarchives/ds-catalogue:25.11.13.1573
 volumes:
   pgdata:
   media:
