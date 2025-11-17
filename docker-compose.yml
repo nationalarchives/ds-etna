@@ -375,6 +375,8 @@ services:
       - mysql_data:/var/lib/mysql:rw
   catalogue:
     image: ghcr.io/nationalarchives/ds-catalogue:25.11.13.1573
+  llm-detection:
+    image: ghcr.io/nationalarchives/ds-llm-detection:25.11.17.6
 volumes:
   pgdata:
   media:
