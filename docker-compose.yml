@@ -176,7 +176,7 @@ services:
   #     - 8080
   llm-detection:
     container_name: llm-detection
-    image: ghcr.io/nationalarchives/ds-llm-detection:25.08.20.92
+    image: ghcr.io/nationalarchives/ds-llm-detection:25.11.17.5
     env_file:
       - .env
     environment:
