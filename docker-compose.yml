@@ -271,7 +271,7 @@ services:
       - 8080
   service-status:
     container_name: service-status
-    image: ghcr.io/nationalarchives/ds-service-status:25.11.18.76
+    image: ghcr.io/nationalarchives/ds-service-status:25.11.18.77
     env_file:
       - .env
     environment:
