@@ -176,7 +176,7 @@ services:
   #     - 8080
   llm-detection:
     container_name: llm-detection
-    image: ghcr.io/nationalarchives/ds-llm-detection:25.11.17.5
+    image: ghcr.io/nationalarchives/ds-llm-detection:25.11.17.7
     env_file:
       - .env
     environment:
@@ -373,10 +373,6 @@ services:
       - MYSQL_PASSWORD=${MYSQL_MATOMO_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql:rw
-  catalogue:
-    image: ghcr.io/nationalarchives/ds-catalogue:25.11.13.1573
-  llm-detection:
-    image: ghcr.io/nationalarchives/ds-llm-detection:25.11.17.7
 volumes:
   pgdata:
   media:
