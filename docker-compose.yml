@@ -174,22 +174,22 @@ services:
   #     - postgres
   #   expose:
   #     - 8080
-  llm-detection:
-    container_name: llm-detection
-    image: ghcr.io/nationalarchives/ds-llm-detection:25.11.17.7
-    env_file:
-      - .env
-    environment:
-      - RUNTIME=production
-      - ENVIRONMENT_NAME=develop
-      - CONFIG=config.Staging
-      - SECRET_KEY=${SECRET_KEY}
-      - COOKIE_DOMAIN=tna.dblclk.dev
-      - CSP_STYLE_SRC='self',fonts.googleapis.com,p.typekit.net,use.typekit.net
-      - CSP_FONT_SRC='self',fonts.gstatic.com,use.typekit.net
-      - ALLOW_INSECURE=true
-    expose:
-      - 8080
+  # llm-detection:
+  #   container_name: llm-detection
+  #   image: ghcr.io/nationalarchives/ds-llm-detection:25.11.17.7
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - RUNTIME=production
+  #     - ENVIRONMENT_NAME=develop
+  #     - CONFIG=config.Staging
+  #     - SECRET_KEY=${SECRET_KEY}
+  #     - COOKIE_DOMAIN=tna.dblclk.dev
+  #     - CSP_STYLE_SRC='self',fonts.googleapis.com,p.typekit.net,use.typekit.net
+  #     - CSP_FONT_SRC='self',fonts.gstatic.com,use.typekit.net
+  #     - ALLOW_INSECURE=true
+  #   expose:
+  #     - 8080
   postgres:
     container_name: postgres
     image: postgres:13
