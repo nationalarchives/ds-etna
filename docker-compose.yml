@@ -327,13 +327,13 @@ services:
       - redis_data:/data
   uptime-kuma:
     container_name: uptime-kuma
-    image: louislam/uptime-kuma:beta
+    image: louislam/uptime-kuma:2
     restart: unless-stopped
     ports:
       - 3001:3001
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - uptime_kuma:/app/data
+      - uptime_kuma2:/app/data
       - ./uptime_kuma_data:/app_data
       - ../uptime_kuma_backups:/backup
   portainer:
@@ -378,6 +378,7 @@ volumes:
   media:
   redis_data:
   uptime_kuma:
+  uptime_kuma2:
   portainer_data:
   matomo_data:
   mysql_data:
