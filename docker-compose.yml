@@ -309,7 +309,7 @@ services:
       - ALLOW_INSECURE=true
       - SESSION_REDIS_URL=redis://redis:6379/0
       - RATELIMIT_REDIS_URL=redis://redis:6379/1
-      - RATELIMIT_DEFAULT="2 per 1 seconds"
+      - RATELIMIT_DEFAULT=4 per 2 seconds
       - ALTCHA_HMAC_KEY=${SECRET_KEY}
       - CACHE_TYPE=RedisCache
       - CACHE_REDIS_URL=redis://redis:6379/2
