@@ -11,7 +11,7 @@ services:
       # - catalogue
       - service-status
       - forms
-      - request-a-service-record
+      # - request-a-service-record
     ports:
       - 80:80
       - 443:443
@@ -242,33 +242,33 @@ services:
   #     - GA4_ID=GTM-KX8ZWVZG
   #   expose:
   #     - 8080
-  request-a-service-record:
-    container_name: request-a-service-record
-    image: ghcr.io/nationalarchives/ds-request-service-record:26.01.12.517
-    env_file:
-      - .env
-    depends_on:
-      - postgres
-    environment:
-      - RUNTIME=production
-      - ENVIRONMENT_NAME=staging
-      - CONFIG=config.Staging
-      - SENTRY_DSN=https://97e0a467ebc6db7db1ed047a36b1d0ec@o1230303.ingest.us.sentry.io/4510186965762048
-      - SECRET_KEY=${SECRET_KEY}
-      - COOKIE_DOMAIN=tna.dblclk.dev
-      - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
-      - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
-      - CACHE_DEFAULT_TIMEOUT=10
-      - GOV_UK_PAY_API_KEY=${GOV_UK_PAY_API_KEY}
-      - GOV_UK_PAY_API_URL=https://publicapi.payments.service.gov.uk/v1/payments
-      # - GA4_ID=GTM-KX8ZWVZG
-      - ALLOW_INSECURE=true
-      - SQLALCHEMY_DATABASE_URI=postgresql://etna:${POSTGRES_PASSWORD}@postgres:5432/postgres
-      - SESSION_REDIS_URL=redis://redis:6379/3
-      - CACHE_TYPE=RedisCache
-      - CACHE_REDIS_URL=redis://redis:6379/4
-    expose:
-      - 8080
+  # request-a-service-record:
+  #   container_name: request-a-service-record
+  #   image: ghcr.io/nationalarchives/ds-request-service-record:26.01.12.517
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - postgres
+  #   environment:
+  #     - RUNTIME=production
+  #     - ENVIRONMENT_NAME=staging
+  #     - CONFIG=config.Staging
+  #     - SENTRY_DSN=https://97e0a467ebc6db7db1ed047a36b1d0ec@o1230303.ingest.us.sentry.io/4510186965762048
+  #     - SECRET_KEY=${SECRET_KEY}
+  #     - COOKIE_DOMAIN=tna.dblclk.dev
+  #     - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
+  #     - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
+  #     - CACHE_DEFAULT_TIMEOUT=10
+  #     - GOV_UK_PAY_API_KEY=${GOV_UK_PAY_API_KEY}
+  #     - GOV_UK_PAY_API_URL=https://publicapi.payments.service.gov.uk/v1/payments
+  #     # - GA4_ID=GTM-KX8ZWVZG
+  #     - ALLOW_INSECURE=true
+  #     - SQLALCHEMY_DATABASE_URI=postgresql://etna:${POSTGRES_PASSWORD}@postgres:5432/postgres
+  #     - SESSION_REDIS_URL=redis://redis:6379/3
+  #     - CACHE_TYPE=RedisCache
+  #     - CACHE_REDIS_URL=redis://redis:6379/4
+  #   expose:
+  #     - 8080
   service-status:
     container_name: service-status
     image: ghcr.io/nationalarchives/ds-service-status:26.01.08.97
