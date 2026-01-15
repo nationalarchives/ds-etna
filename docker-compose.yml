@@ -373,6 +373,8 @@ services:
       - MYSQL_PASSWORD=${MYSQL_MATOMO_PASSWORD}
     volumes:
       - mysql_data:/var/lib/mysql:rw
+  request-a-service-record:
+    image: ghcr.io/nationalarchives/ds-request-service-record:26.01.15.523
 volumes:
   pgdata:
   media:
