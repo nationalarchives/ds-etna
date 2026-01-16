@@ -275,7 +275,7 @@ services:
     env_file:
       - .env
     environment:
-      - RUNTIME=production
+      - APPLICATION_PROTOCOL=http
       - ENVIRONMENT_NAME=staging
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
@@ -299,7 +299,7 @@ services:
     env_file:
       - .env
     environment:
-      - RUNTIME=production
+      - APPLICATION_PROTOCOL=http
       - ENVIRONMENT_NAME=staging
       - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
