@@ -6,6 +6,8 @@ on:
     branches:
       - proof-of-concept
 
+permissions: {}
+
 concurrency:
   group: test-local-${{ github.ref }}
 
