@@ -374,7 +374,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql:rw
   request-a-service-record:
-    image: ghcr.io/nationalarchives/ds-request-service-record:26.02.16.627
+    image: ghcr.io/nationalarchives/ds-request-service-record:26.02.18.630
 volumes:
   pgdata:
   media:
