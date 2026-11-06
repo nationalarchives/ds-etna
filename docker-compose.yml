@@ -103,8 +103,7 @@ services:
     env_file:
       - .env
     environment:
-      - APP_NAME=Live chat
-      - APP_ENV=production
+      - ENVIRONMENT=production
       - APPLICATION_PROTOCOL=http
       - SECRET_KEY=${SECRET_KEY}
       - DATABASE_URL=postgresql+asyncpg://etna:${POSTGRES_PASSWORD}@postgres:5432/chat
