@@ -32,13 +32,6 @@ services:
       - POSTGRES_DB=etna
     volumes:
       - pgdata:/var/lib/postgresql/data:rw
-    expose:
-      - 5432
-  # adminer:
-  #   image: adminer
-  #   restart: always
-  #   ports:
-  #     - 8080:8080
   # catalogue:
   #   container_name: catalogue
   #   image: ghcr.io/nationalarchives/ds-catalogue:25.11.12.1568
@@ -71,8 +64,6 @@ services:
   #     - ONSITE_IP_ADDRESSES=10.136.0.0/19,167.98.93.94/32,10.120.0.0/13,10.112.0.0/13
   #     - WAGTAIL_API_URL=https://wagtail.nationalarchives.gov.uk/api/v2
   #     - GA4_ID=GTM-KX8ZWVZG
-  #   expose:
-  #     - 8080
   service-status:
     container_name: service-status
     image: ghcr.io/nationalarchives/ds-service-status:26.10.23.160
@@ -94,11 +85,10 @@ services:
       - UPTIME_KUMA_JWT=${UPTIME_KUMA_JWT}
       - ALLOW_INSECURE=true
       - CACHE_DEFAULT_TIMEOUT=300
-      - _SENTRY_DSN=https://f0dfd41f5e17da117bde6cde2371045f@o1230303.ingest.us.sentry.io/4509966773387264
-    expose:
-      - 8080
   chat:
     container_name: chat
+    annotations:
+      - build: value
     image: ghcr.io/nationalarchives/ds-live-chat:feature-proof-of-concept
     env_file:
       - .env
@@ -118,8 +108,6 @@ services:
         set -e
         poetry run python migrate.py
         tna-asgi main:app
-    expose:
-      - 8080
   # forms:
   #   container_name: forms
   #   image: ghcr.io/nationalarchives/ds-forms:26.03.25.100
@@ -140,8 +128,6 @@ services:
   #     - ALTCHA_HMAC_KEY=${SECRET_KEY}
   #     - CACHE_TYPE=RedisCache
   #     - CACHE_REDIS_URL=redis://redis:6379/2
-  #   expose:
-  #     - 8080
   redis:
     container_name: redis
     image: redis:latest
