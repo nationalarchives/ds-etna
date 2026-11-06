@@ -111,6 +111,13 @@ services:
       - REDIS_URL=redis://redis:6379/3
       - TRUSTED_HOSTS=chat.tna.dblclk.dev
       - LOG_LEVEL=info
+    command:
+      - sh
+      - -c
+      - |
+        set -e
+        poetry run python migrate.py
+        tna-asgi main:app
     expose:
       - 8080
   # forms:
