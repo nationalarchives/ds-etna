@@ -109,7 +109,7 @@ services:
       - SECRET_KEY=${SECRET_KEY}
       - DATABASE_URL=postgresql+asyncpg://etna:${POSTGRES_PASSWORD}@postgres:5432/chat
       - REDIS_URL=redis://redis:6379/3
-      - TRUSTED_HOSTS=127.0.0.1,chat.tna.dblclk.dev
+      - TRUSTED_HOSTS=127.0.0.1,tna.dblclk.dev,chat.tna.dblclk.dev
       - LOG_LEVEL=info
     command:
       - sh
