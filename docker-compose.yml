@@ -97,28 +97,44 @@ services:
       - _SENTRY_DSN=https://f0dfd41f5e17da117bde6cde2371045f@o1230303.ingest.us.sentry.io/4509966773387264
     expose:
       - 8080
-  forms:
-    container_name: forms
-    image: ghcr.io/nationalarchives/ds-forms:26.03.25.100
+  chat:
+    container_name: chat
+    image: ghcr.io/nationalarchives/ds-live-chat:feature-proof-of-concept
     env_file:
       - .env
     environment:
+      - APP_NAME=Live chat
+      - APP_ENV=production
       - APPLICATION_PROTOCOL=http
-      - ENVIRONMENT_NAME=staging
-      - CONFIG=config.Staging
       - SECRET_KEY=${SECRET_KEY}
-      - COOKIE_DOMAIN=tna.dblclk.dev
-      - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
-      - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
-      - ALLOW_INSECURE=true
-      - SESSION_REDIS_URL=redis://redis:6379/0
-      - RATELIMIT_REDIS_URL=redis://redis:6379/1
-      - RATELIMIT_DEFAULT=4 per 2 seconds
-      - ALTCHA_HMAC_KEY=${SECRET_KEY}
-      - CACHE_TYPE=RedisCache
-      - CACHE_REDIS_URL=redis://redis:6379/2
+      - DATABASE_URL=postgresql+asyncpg://etna:${POSTGRES_PASSWORD}@postgres:5432/chat
+      - REDIS_URL=redis://redis:6379/3
+      - TRUSTED_HOSTS=chat.tna.dblclk.dev
+      - LOG_LEVEL=info
     expose:
       - 8080
+  # forms:
+  #   container_name: forms
+  #   image: ghcr.io/nationalarchives/ds-forms:26.03.25.100
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - APPLICATION_PROTOCOL=http
+  #     - ENVIRONMENT_NAME=staging
+  #     - CONFIG=config.Staging
+  #     - SECRET_KEY=${SECRET_KEY}
+  #     - COOKIE_DOMAIN=tna.dblclk.dev
+  #     - CSP_STYLE_SRC='self',https://fonts.googleapis.com,https://p.typekit.net,https://use.typekit.net
+  #     - CSP_FONT_SRC='self',https://fonts.gstatic.com,https://use.typekit.net
+  #     - ALLOW_INSECURE=true
+  #     - SESSION_REDIS_URL=redis://redis:6379/0
+  #     - RATELIMIT_REDIS_URL=redis://redis:6379/1
+  #     - RATELIMIT_DEFAULT=4 per 2 seconds
+  #     - ALTCHA_HMAC_KEY=${SECRET_KEY}
+  #     - CACHE_TYPE=RedisCache
+  #     - CACHE_REDIS_URL=redis://redis:6379/2
+  #   expose:
+  #     - 8080
   redis:
     container_name: redis
     image: redis:latest
@@ -151,32 +167,32 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
-  matomo:
-    container_name: matomo
-    image: matomo:fpm-alpine
-    env_file:
-      - .env
-    environment:
-      - MATOMO_DATABASE_HOST=mysql
-      - MATOMO_DATABASE_ADAPTER=mysql
-      - MATOMO_DATABASE_USERNAME=matomo
-      - MATOMO_DATABASE_PASSWORD=${MYSQL_MATOMO_PASSWORD}
-      - MATOMO_DATABASE_DBNAME=matomo
-    restart: unless-stopped
-    volumes:
-      - matomo_data:/var/www/html:rw
-  mysql:
-    container_name: mysql
-    image: mysql:lts
-    env_file:
-      - .env
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=matomo
-      - MYSQL_USER=matomo
-      - MYSQL_PASSWORD=${MYSQL_MATOMO_PASSWORD}
-    volumes:
-      - mysql_data:/var/lib/mysql:rw
+  # matomo:
+  #   container_name: matomo
+  #   image: matomo:fpm-alpine
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - MATOMO_DATABASE_HOST=mysql
+  #     - MATOMO_DATABASE_ADAPTER=mysql
+  #     - MATOMO_DATABASE_USERNAME=matomo
+  #     - MATOMO_DATABASE_PASSWORD=${MYSQL_MATOMO_PASSWORD}
+  #     - MATOMO_DATABASE_DBNAME=matomo
+  #   restart: unless-stopped
+  #   volumes:
+  #     - matomo_data:/var/www/html:rw
+  # mysql:
+  #   container_name: mysql
+  #   image: mysql:lts
+  #   env_file:
+  #     - .env
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+  #     - MYSQL_DATABASE=matomo
+  #     - MYSQL_USER=matomo
+  #     - MYSQL_PASSWORD=${MYSQL_MATOMO_PASSWORD}
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql:rw
 volumes:
   pgdata:
   media:
