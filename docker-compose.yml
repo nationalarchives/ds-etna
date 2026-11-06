@@ -87,7 +87,7 @@ services:
   chat:
     container_name: chat
     annotations:
-      build: 36731ea1df9ae4fa4b205d694b1f24bc63cac94e
+      build: 749789afc95096cbc5a1992a772ca1a917c22ab8
     image: ghcr.io/nationalarchives/ds-live-chat:feature-proof-of-concept
     env_file:
       - .env
