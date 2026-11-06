@@ -66,7 +66,7 @@ services:
   #     - GA4_ID=GTM-KX8ZWVZG
   service-status:
     container_name: service-status
-    image: ghcr.io/nationalarchives/ds-service-status:26.10.23.160
+    image: ghcr.io/nationalarchives/ds-service-status:26.11.06.163
     env_file:
       - .env
     environment:
@@ -93,8 +93,7 @@ services:
     env_file:
       - .env
     environment:
-      - APP_NAME=Live chat
-      - APP_ENV=production
+      - ENVIRONMENT=production
       - APPLICATION_PROTOCOL=http
       - SECRET_KEY=${SECRET_KEY}
       - DATABASE_URL=postgresql+asyncpg://etna:${POSTGRES_PASSWORD}@postgres:5432/chat
@@ -160,32 +159,32 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer_data:/data
-  # matomo:
-  #   container_name: matomo
-  #   image: matomo:fpm-alpine
-  #   env_file:
-  #     - .env
-  #   environment:
-  #     - MATOMO_DATABASE_HOST=mysql
-  #     - MATOMO_DATABASE_ADAPTER=mysql
-  #     - MATOMO_DATABASE_USERNAME=matomo
-  #     - MATOMO_DATABASE_PASSWORD=${MYSQL_MATOMO_PASSWORD}
-  #     - MATOMO_DATABASE_DBNAME=matomo
-  #   restart: unless-stopped
-  #   volumes:
-  #     - matomo_data:/var/www/html:rw
-  # mysql:
-  #   container_name: mysql
-  #   image: mysql:lts
-  #   env_file:
-  #     - .env
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-  #     - MYSQL_DATABASE=matomo
-  #     - MYSQL_USER=matomo
-  #     - MYSQL_PASSWORD=${MYSQL_MATOMO_PASSWORD}
-  #   volumes:
-  #     - mysql_data:/var/lib/mysql:rw
+      # matomo:
+      #   container_name: matomo
+      #   image: matomo:fpm-alpine
+      #   env_file:
+      #     - .env
+      #   environment:
+      #     - MATOMO_DATABASE_HOST=mysql
+      #     - MATOMO_DATABASE_ADAPTER=mysql
+      #     - MATOMO_DATABASE_USERNAME=matomo
+      #     - MATOMO_DATABASE_PASSWORD=${MYSQL_MATOMO_PASSWORD}
+      #     - MATOMO_DATABASE_DBNAME=matomo
+      #   restart: unless-stopped
+      #   volumes:
+      #     - matomo_data:/var/www/html:rw
+      # mysql:
+      #   container_name: mysql
+      #   image: mysql:lts
+      #   env_file:
+      #     - .env
+      #   environment:
+      #     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      #     - MYSQL_DATABASE=matomo
+      #     - MYSQL_USER=matomo
+      #     - MYSQL_PASSWORD=${MYSQL_MATOMO_PASSWORD}
+      #   volumes:
+      #     - mysql_data:/var/lib/mysql:rw
 volumes:
   pgdata:
   media:
